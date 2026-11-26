@@ -4,6 +4,8 @@ public class GestionJuguetes {
 
     private Juguete[] juguetes;
     private int cont;
+    private MovimientoInventario[] movimientos = new MovimientoInventario[5000];
+    private int contM = 0;
 
     public GestionJuguetes() {
         juguetes = new Juguete[50];
@@ -15,6 +17,10 @@ public class GestionJuguetes {
             return false;
         }
         if (buscarPorCodigo(obj.getCodigo()) != -1) {
+            return false;
+        }
+        Fecha fecha = GestionReportes.leerFecha(obj.getFecha());
+        if (fecha == null || obj.getStock() < 0 || !registrarMovimiento(obj.getCategoria(), obj.getStock(), fecha)) {
             return false;
         }
         juguetes[cont] = obj;
@@ -40,7 +46,54 @@ public class GestionJuguetes {
         return true;
     }
 
-    public void eliminar(int pos) {
+    public boolean registrarMovimiento(String categoria, int cantidad, Fecha fecha) {
+        if (cantidad == 0) {
+            return true;
+        }
+        if (fecha == null || contM >= movimientos.length) {
+            return false;
+        }
+        movimientos[contM] = new MovimientoInventario(categoria, cantidad, fecha);
+        contM++;
+        return true;
+    }
+
+    public MovimientoInventario[] getMovimientos() { return movimientos; }
+    public int getContM() { return contM; }
+
+    public boolean modificar(int pos, Juguete nuevo, Fecha fecha) {
+        if (fecha == null || nuevo.getStock() < 0 || contM + 2 > movimientos.length) {
+            return false;
+        }
+        Juguete anterior = juguetes[pos];
+        if (anterior.getCategoria().equals(nuevo.getCategoria())) {
+            registrarMovimiento(nuevo.getCategoria(), nuevo.getStock() - anterior.getStock(), fecha);
+        } else {
+            registrarMovimiento(anterior.getCategoria(), -anterior.getStock(), fecha);
+            registrarMovimiento(nuevo.getCategoria(), nuevo.getStock(), fecha);
+        }
+        juguetes[pos] = nuevo;
+        return true;
+    }
+
+    public boolean actualizarStock(int pos, int stock, Fecha fecha) {
+        if (stock < 0 || fecha == null || !registrarMovimiento(juguetes[pos].getCategoria(), stock - juguetes[pos].getStock(), fecha)) {
+            return false;
+        }
+        juguetes[pos].setStock(stock);
+        juguetes[pos].setFecha(fecha.texto());
+        return true;
+    }
+
+    public boolean eliminar(int pos, Fecha fecha) {
+        if (fecha == null || !registrarMovimiento(juguetes[pos].getCategoria(), -juguetes[pos].getStock(), fecha)) {
+            return false;
+        }
+        eliminar(pos);
+        return true;
+    }
+
+    private void eliminar(int pos) {
         for (int i = pos; i < cont - 1; i++) {
             juguetes[i] = juguetes[i + 1];
         }

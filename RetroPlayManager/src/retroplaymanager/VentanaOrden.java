@@ -456,7 +456,7 @@ public class VentanaOrden extends javax.swing.JFrame {
             almacenero = orden.getAlmacenero().getUsuario();
         }
         String texto = String.format("Orden %d de %s\nEstado: %s\nCliente: %s %s (%s)\nEntrega: %s el %s\n", orden.getNumero(), orden.getTipo(), orden.getEstado(), orden.getCliente().getNombres(), orden.getCliente().getApellidos(), orden.getCliente().getTipo(), orden.getTipoEntrega(), orden.getFechaEntrega().textoConHora());
-        String montos = String.format("Juguetes: S/ %.2f\nDescuento: S/ %.2f\nServicios: S/ %.2f\nPaquetes: S/ %.2f\nEnvio: S/ %.2f\nTotal: S/ %.2f\nAdelanto: S/ %.2f\nSaldo: S/ %.2f\n", orden.totalJuguetes(), orden.descuento(), orden.totalServicios(), orden.totalPaquetes(), orden.getCostoEnvio(), orden.calcularTotal(), orden.getAdelanto(), orden.saldo());
+        String montos = String.format("Juguetes: S/ %.2f\nDescuento: S/ %.2f\nServicios: S/ %.2f\nPaquetes: S/ %.2f\nEnvio: S/ %.2f\nSubtotal: S/ %.2f\nIGV: S/ %.2f\nTotal: S/ %.2f\nAdelanto: S/ %.2f\nSaldo: S/ %.2f\n", orden.totalJuguetes(), orden.descuento(), orden.totalServicios(), orden.totalPaquetes(), orden.getCostoEnvio(), orden.calcularSubtotal(), orden.calcularIGV(), orden.calcularTotal(), orden.getAdelanto(), orden.saldo());
         String cierre = String.format("Vendedor: %s\nAlmacenero: %s\nDevuelto: S/ %.2f\nRetenido: S/ %.2f", orden.getVendedor().getUsuario(), almacenero, orden.getDevolucion(), orden.getRetenido());
         return String.format("%s%s%s", texto, montos, cierre);
     }

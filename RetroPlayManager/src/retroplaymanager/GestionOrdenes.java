@@ -357,6 +357,7 @@ public class GestionOrdenes {
         if (!mensaje.equals("")) {
             return mensaje;
         }
+        orden.fijarDescuento();
         orden.setAdelanto(orden.calcularAdelanto());
         orden.cambiarEstado("Confirmada", fecha, empleado.getUsuario(), String.format("Adelanto del 50 por ciento pagado: S/ %.2f", orden.getAdelanto()));
         return "";
@@ -378,6 +379,7 @@ public class GestionOrdenes {
         if (!mensaje.equals("")) {
             return mensaje;
         }
+        orden.registrarCategorias(tienda);
         moverInventario(orden, "descontar", fecha, tienda);
         orden.setAlmacenero(empleado);
         orden.cambiarEstado("En Preparacion", fecha, empleado.getUsuario(), String.format("Producto verificado, juguetes pasan a %s", orden.estadoJuguete()));
@@ -442,7 +444,7 @@ public class GestionOrdenes {
 
     public void actualizarCliente(Cliente nuevo) {
         for (int i = 0; i < cont; i++) {
-            if (ordenes[i].getCliente().getDni().equals(nuevo.getDni())) {
+            if (!ordenes[i].estaCerrada() && ordenes[i].getCliente().getDni().equals(nuevo.getDni())) {
                 ordenes[i].setCliente(nuevo);
             }
         }

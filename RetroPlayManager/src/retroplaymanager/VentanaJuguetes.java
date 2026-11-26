@@ -323,7 +323,10 @@ public class VentanaJuguetes extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Categoria no permitida", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        gestion.registrar(obj);
+        if (!gestion.registrar(obj)) {
+            JOptionPane.showMessageDialog(this, "Fecha invalida (dia/mes/anio), stock negativo o sin capacidad", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
         JOptionPane.showMessageDialog(this, "Juguete registrado", "Info", JOptionPane.INFORMATION_MESSAGE);
         limpiar();
         mostrar();
@@ -352,7 +355,10 @@ public class VentanaJuguetes extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Categoria no permitida", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        gestion.getJuguetes()[pos] = obj;
+        if (!gestion.modificar(pos, obj, GestionReportes.leerFecha(entFecha.getText()))) {
+            JOptionPane.showMessageDialog(this, "Ingrese fecha valida (dia/mes/anio) y stock no negativo", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
         JOptionPane.showMessageDialog(this, "Juguete modificado", "Info", JOptionPane.INFORMATION_MESSAGE);
         mostrar();
     }
@@ -364,7 +370,11 @@ public class VentanaJuguetes extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Juguete no encontrado", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        gestion.eliminar(pos);
+        String textoFecha = JOptionPane.showInputDialog(this, "Fecha de eliminacion (dia/mes/anio)");
+        if (!gestion.eliminar(pos, GestionReportes.leerFecha(textoFecha))) {
+            JOptionPane.showMessageDialog(this, "Fecha invalida o historial lleno", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
         JOptionPane.showMessageDialog(this, "Juguete eliminado", "Info", JOptionPane.INFORMATION_MESSAGE);
         limpiar();
         mostrar();

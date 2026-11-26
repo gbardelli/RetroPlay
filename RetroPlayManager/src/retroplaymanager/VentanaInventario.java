@@ -210,9 +210,9 @@ public class VentanaInventario extends javax.swing.JFrame {
             return;
         }
         int stock = Integer.parseInt(entStock.getText());
-        tienda.getJuguetes().getJuguetes()[pos].setStock(stock);
-        if (!entFecha.getText().equals("")) {
-            tienda.getJuguetes().getJuguetes()[pos].setFecha(entFecha.getText());
+        if (!tienda.getJuguetes().actualizarStock(pos, stock, GestionReportes.leerFecha(entFecha.getText()))) {
+            JOptionPane.showMessageDialog(this, "Ingrese fecha valida (dia/mes/anio) y stock no negativo", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
         }
         JOptionPane.showMessageDialog(this, "Stock actualizado", "Info", JOptionPane.INFORMATION_MESSAGE);
         consultar();

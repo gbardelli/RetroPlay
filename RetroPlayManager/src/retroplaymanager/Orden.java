@@ -13,6 +13,8 @@ public abstract class Orden {
     protected Fecha fechaCierre;
     protected double costoEnvio;
     protected double adelanto;
+    private double descuentoFijo = -1;
+    private int[] vendidosCategoria = new int[3];
     protected double devolucion;
     protected double retenido;
     protected DetalleOrden[] detalles;
@@ -145,11 +147,60 @@ public abstract class Orden {
     }
 
     public double descuento() {
+        if (descuentoFijo >= 0) {
+            return descuentoFijo;
+        }
         return cliente.calcularDescuento(totalJuguetes());
     }
 
-    public double calcularTotal() {
+    public void fijarDescuento() {
+        descuentoFijo = descuento();
+    }
+
+    public double calcularSubtotal() {
         return totalJuguetes() - descuento() + totalServicios() + totalPaquetes() + costoEnvio;
+    }
+
+    public double calcularIGV() { return calcularSubtotal() * 0.18; }
+
+    public double calcularTotal() { return calcularSubtotal() + calcularIGV(); }
+
+    public int[] getVendidosCategoria() { return vendidosCategoria; }
+
+    public void registrarCategorias(Tienda tienda) {
+        vendidosCategoria = new int[3];
+        for (int i = 0; i < contD; i++) {
+            DetalleOrden d = detalles[i];
+            if (d.getTipo().equals("Juguete")) {
+                int pos = tienda.getJuguetes().buscarPorCodigo(d.getCodigo());
+                String cat = d.getCategoria();
+                if (pos != -1) {
+                    cat = tienda.getJuguetes().getJuguetes()[pos].getCategoria();
+                }
+                sumarCategoria(cat, d.getCantidad());
+            }
+            if (d.getTipo().equals("Paquete")) {
+                int pos = tienda.getPaquetes().buscarPorNombre(d.getCodigo());
+                if (pos != -1) {
+                    Paquete paq = tienda.getPaquetes().getPaquetes()[pos];
+                    for (int j = 0; j < paq.getContJ(); j++) {
+                        Juguete juguete = paq.getJuguetes()[j];
+                        int k = tienda.getJuguetes().buscarPorCodigo(juguete.getCodigo());
+                        if (k != -1) {
+                            juguete = tienda.getJuguetes().getJuguetes()[k];
+                        }
+                        sumarCategoria(juguete.getCategoria(), d.getCantidad());
+                    }
+                }
+            }
+        }
+    }
+
+    private void sumarCategoria(String categoria, int cantidad) {
+        int pos = GestionReportes.posCategoria(categoria);
+        if (pos != -1) {
+            vendidosCategoria[pos] += cantidad;
+        }
     }
 
     public double calcularAdelanto() {
