@@ -66,16 +66,16 @@ public class VentanaOrden extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Ordenes");
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14));
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel1.setText("Numero de orden");
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14));
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel2.setText("Fecha (d m a)");
 
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 14));
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel3.setText("Hora (0 - 23)");
 
-        btnVer.setFont(new java.awt.Font("Segoe UI", 0, 13));
+        btnVer.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
         btnVer.setText("Ver detalle");
         btnVer.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -83,7 +83,7 @@ public class VentanaOrden extends javax.swing.JFrame {
             }
         });
 
-        btnMostrar.setFont(new java.awt.Font("Segoe UI", 0, 13));
+        btnMostrar.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
         btnMostrar.setText("Mostrar");
         btnMostrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -91,7 +91,7 @@ public class VentanaOrden extends javax.swing.JFrame {
             }
         });
 
-        btnConfirmar.setFont(new java.awt.Font("Segoe UI", 0, 13));
+        btnConfirmar.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
         btnConfirmar.setText("Confirmar");
         btnConfirmar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -99,7 +99,7 @@ public class VentanaOrden extends javax.swing.JFrame {
             }
         });
 
-        btnPreparar.setFont(new java.awt.Font("Segoe UI", 0, 13));
+        btnPreparar.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
         btnPreparar.setText("Preparar");
         btnPreparar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -107,7 +107,7 @@ public class VentanaOrden extends javax.swing.JFrame {
             }
         });
 
-        btnEntregar.setFont(new java.awt.Font("Segoe UI", 0, 13));
+        btnEntregar.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
         btnEntregar.setText("Entregar");
         btnEntregar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -115,7 +115,7 @@ public class VentanaOrden extends javax.swing.JFrame {
             }
         });
 
-        btnCancelar.setFont(new java.awt.Font("Segoe UI", 0, 13));
+        btnCancelar.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
         btnCancelar.setText("Cancelar");
         btnCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -123,7 +123,7 @@ public class VentanaOrden extends javax.swing.JFrame {
             }
         });
 
-        btnNueva.setFont(new java.awt.Font("Segoe UI", 1, 14));
+        btnNueva.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnNueva.setText("Nueva orden -->");
         btnNueva.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -204,30 +204,30 @@ public class VentanaOrden extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
         );
 
-        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 14));
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel4.setText("Ordenes registradas");
 
-        Datos.setFont(new java.awt.Font("Segoe UI", 0, 13));
+        Datos.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
         Datos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {},
             new String [] { "Numero", "Tipo", "Cliente", "Vendedor", "Entrega", "Fecha entrega", "Estado", "Total", "Adelanto" }
         ));
         jScrollPane1.setViewportView(Datos);
 
-        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 14));
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel5.setText("Detalle de la orden");
 
-        Detalle.setFont(new java.awt.Font("Segoe UI", 0, 13));
+        Detalle.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
         Detalle.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {},
             new String [] { "Tipo", "Codigo", "Nombre", "Cantidad", "Precio", "Subtotal" }
         ));
         jScrollPane2.setViewportView(Detalle);
 
-        jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 14));
+        jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel6.setText("Historial de la orden");
 
-        Historial.setFont(new java.awt.Font("Segoe UI", 0, 13));
+        Historial.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
         Historial.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {},
             new String [] { "Fecha", "Anterior", "Nuevo", "Usuario", "Observacion" }

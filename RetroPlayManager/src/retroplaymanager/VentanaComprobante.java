@@ -1,200 +1,339 @@
 package retroplaymanager;
 
-import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
-import java.awt.*;
-import java.awt.event.*;
+import javax.swing.JOptionPane;
 
 public class VentanaComprobante extends javax.swing.JFrame {
 
     private Tienda tienda;
+    private javax.swing.table.DefaultTableModel modelo;
 
     public VentanaComprobante(Tienda tienda) {
         this.tienda = tienda;
         initComponents();
-        construir();
-    }
-
-    public Tienda getTienda() {
-        return tienda;
+        modelo = (javax.swing.table.DefaultTableModel) Datos.getModel();
+        actualizarTipo();
+        if (autorizado()) {
+            mostrar();
+        }
     }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        pnlDatos = new javax.swing.JPanel();
+        pnlTabla = new javax.swing.JPanel();
+        pnlDetalle = new javax.swing.JPanel();
+        lblNumOrden = new javax.swing.JLabel();
+        entNumero = new javax.swing.JTextField();
+        lblTipo = new javax.swing.JLabel();
+        cboTipo = new javax.swing.JComboBox();
+        lblRuc = new javax.swing.JLabel();
+        entRuc = new javax.swing.JTextField();
+        lblRazon = new javax.swing.JLabel();
+        entRazon = new javax.swing.JTextField();
+        btnActualizar = new javax.swing.JButton();
+        btnVer = new javax.swing.JButton();
+        btnEmitir = new javax.swing.JButton();
+        scrTabla = new javax.swing.JScrollPane();
+        Datos = new javax.swing.JTable();
+        scrDetalle = new javax.swing.JScrollPane();
+        txtDetalle = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Comprobante");
+        setTitle("Comprobantes");
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 16));
-        jLabel1.setText("Comprobante");
+        lblNumOrden.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lblNumOrden.setText("Nro. de orden");
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createSequentialGroup()
-                .addGap(24, 24, 24)
-                .addComponent(jLabel1)
-                .addGap(24, 24, 24)
+        lblTipo.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lblTipo.setText("Tipo");
+
+        cboTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Boleta", "Factura" }));
+        cboTipo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cboTipoActionPerformed(evt);
+            }
+        });
+
+        lblRuc.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lblRuc.setText("RUC");
+
+        lblRazon.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lblRazon.setText("Razon social");
+
+        btnActualizar.setFont(new java.awt.Font("Segoe UI", 1, 13)); // NOI18N
+        btnActualizar.setText("Actualizar");
+        btnActualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnActualizarActionPerformed(evt);
+            }
+        });
+
+        btnVer.setFont(new java.awt.Font("Segoe UI", 1, 13)); // NOI18N
+        btnVer.setText("Ver cuenta");
+        btnVer.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVerActionPerformed(evt);
+            }
+        });
+
+        btnEmitir.setFont(new java.awt.Font("Segoe UI", 1, 13)); // NOI18N
+        btnEmitir.setText("Emitir");
+        btnEmitir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEmitirActionPerformed(evt);
+            }
+        });
+
+        Datos.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Orden", "Cliente", "Fecha cierre", "Total", "Saldo", "Comprobante"
+            }
+        ));
+        scrTabla.setViewportView(Datos);
+
+        txtDetalle.setEditable(false);
+        txtDetalle.setColumns(20);
+        txtDetalle.setRows(5);
+        scrDetalle.setViewportView(txtDetalle);
+
+        javax.swing.GroupLayout pnlDatosLayout = new javax.swing.GroupLayout(pnlDatos);
+        pnlDatos.setLayout(pnlDatosLayout);
+        pnlDatosLayout.setHorizontalGroup(
+            pnlDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlDatosLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(pnlDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(lblNumOrden)
+                    .addComponent(lblTipo)
+                    .addComponent(lblRuc)
+                    .addComponent(lblRazon))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnlDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(entNumero, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cboTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(entRuc, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(entRazon, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(pnlDatosLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(btnActualizar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnVer)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnEmitir)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createSequentialGroup()
-                .addGap(24, 24, 24)
-                .addComponent(jLabel1)
-                .addGap(280, 280, 280)
+        pnlDatosLayout.setVerticalGroup(
+            pnlDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlDatosLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(pnlDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblNumOrden)
+                    .addComponent(entNumero))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnlDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblTipo)
+                    .addComponent(cboTipo))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnlDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblRuc)
+                    .addComponent(entRuc))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnlDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblRazon)
+                    .addComponent(entRazon))
+                .addGap(18, 18, 18)
+                .addGroup(pnlDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnActualizar)
+                    .addComponent(btnVer)
+                    .addComponent(btnEmitir))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout pnlTablaLayout = new javax.swing.GroupLayout(pnlTabla);
+        pnlTabla.setLayout(pnlTablaLayout);
+        pnlTablaLayout.setHorizontalGroup(
+            pnlTablaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlTablaLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(scrTabla, javax.swing.GroupLayout.DEFAULT_SIZE, 760, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        pnlTablaLayout.setVerticalGroup(
+            pnlTablaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlTablaLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(scrTabla, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        javax.swing.GroupLayout pnlDetalleLayout = new javax.swing.GroupLayout(pnlDetalle);
+        pnlDetalle.setLayout(pnlDetalleLayout);
+        pnlDetalleLayout.setHorizontalGroup(
+            pnlDetalleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlDetalleLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(scrDetalle, javax.swing.GroupLayout.DEFAULT_SIZE, 760, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        pnlDetalleLayout.setVerticalGroup(
+            pnlDetalleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlDetalleLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(scrDetalle, javax.swing.GroupLayout.DEFAULT_SIZE, 230, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createSequentialGroup().addComponent(jPanel1)
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(pnlDatos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(pnlTabla, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(pnlDetalle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
-            layout.createSequentialGroup().addComponent(jPanel1)
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(pnlDatos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(pnlTabla, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(pnlDetalle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JPanel jPanel1;
-    // End of variables declaration//GEN-END:variables
-    private DefaultTableModel modelo = new DefaultTableModel();
-    private JTable tabla = new JTable(modelo);
-    private JComboBox<String> tipo = new JComboBox<>(new String[]{"Boleta", "Factura"});
-    private JTextField ruc = new JTextField(12);
-    private JTextField razon = new JTextField(18);
-    private JTextArea detalle = new JTextArea(18, 55);
-    private JButton btnEmitir = new JButton("Emitir comprobante");
-    private JButton btnVer = new JButton("Ver cuenta / comprobante");
-    private JButton btnActualizar = new JButton("Actualizar");
-
-    private void construir() {
-        setTitle("RetroPlay - Comprobantes");
-        modelo.addColumn("Orden");
-        modelo.addColumn("Cliente");
-        modelo.addColumn("Fecha cierre");
-        modelo.addColumn("Total S/");
-        modelo.addColumn("Saldo S/");
-        modelo.addColumn("Comprobante");
-        tabla.setDefaultEditor(Object.class, null);
-        detalle.setEditable(false);
-        JPanel controles = new JPanel(new FlowLayout());
-        controles.add(new JLabel("Tipo"));
-        controles.add(tipo);
-        controles.add(new JLabel("RUC"));
-        controles.add(ruc);
-        controles.add(new JLabel("Razon social"));
-        controles.add(razon);
-        JPanel botones = new JPanel(new FlowLayout());
-        botones.add(btnActualizar);
-        botones.add(btnVer);
-        botones.add(btnEmitir);
-        JPanel arriba = new JPanel(new GridLayout(2, 1));
-        arriba.add(controles);
-        arriba.add(botones);
-        JPanel centro = new JPanel(new BorderLayout());
-        JScrollPane tablaOrdenes = new JScrollPane(tabla);
-        tablaOrdenes.setPreferredSize(new Dimension(800, 140));
-        centro.add(tablaOrdenes, BorderLayout.NORTH);
-        centro.add(new JScrollPane(detalle), BorderLayout.CENTER);
-        JPanel panel = new JPanel(new BorderLayout());
-        panel.add(arriba, BorderLayout.NORTH);
-        panel.add(centro, BorderLayout.CENTER);
-        setContentPane(panel);
-        tipo.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) { actualizarTipo(); }
-        });
-        btnActualizar.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) { mostrar(); }
-        });
-        btnVer.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) { ver(); }
-        });
-        btnEmitir.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) { emitir(); }
-        });
+    private void cboTipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboTipoActionPerformed
         actualizarTipo();
-        if (!autorizado()) {
-            btnEmitir.setEnabled(false);
-            btnVer.setEnabled(false);
-            btnActualizar.setEnabled(false);
-            detalle.setText("Acceso denegado");
-        } else {
-            mostrar();
+    }//GEN-LAST:event_cboTipoActionPerformed
+
+    private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
+        mostrar();
+    }//GEN-LAST:event_btnActualizarActionPerformed
+
+    private void btnVerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerActionPerformed
+        ver();
+    }//GEN-LAST:event_btnVerActionPerformed
+
+    private void btnEmitirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEmitirActionPerformed
+        emitir();
+    }//GEN-LAST:event_btnEmitirActionPerformed
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel pnlDatos;
+    private javax.swing.JPanel pnlTabla;
+    private javax.swing.JPanel pnlDetalle;
+    private javax.swing.JLabel lblNumOrden;
+    private javax.swing.JTextField entNumero;
+    private javax.swing.JLabel lblTipo;
+    private javax.swing.JComboBox<String> cboTipo;
+    private javax.swing.JLabel lblRuc;
+    private javax.swing.JTextField entRuc;
+    private javax.swing.JLabel lblRazon;
+    private javax.swing.JTextField entRazon;
+    private javax.swing.JButton btnActualizar;
+    private javax.swing.JButton btnVer;
+    private javax.swing.JButton btnEmitir;
+    private javax.swing.JScrollPane scrTabla;
+    private javax.swing.JTable Datos;
+    private javax.swing.JScrollPane scrDetalle;
+    private javax.swing.JTextArea txtDetalle;
+    // End of variables declaration//GEN-END:variables
+
+    public boolean autorizado() {
+        if (tienda.getSesion() == null) {
+            return false;
         }
-        setSize(910, 760);
-        setLocationRelativeTo(null);
+        return tienda.getSesion().getRol().equals("Vendedor");
     }
 
-    private boolean autorizado() {
-        return tienda.getSesion() != null && tienda.getSesion().getRol().equals("Vendedor");
-    }
-
-    private void actualizarTipo() {
-        boolean factura = tipo.getSelectedItem().equals("Factura");
-        ruc.setEnabled(factura);
-        razon.setEnabled(factura);
+    public void actualizarTipo() {
+        boolean factura = cboTipo.getSelectedItem().equals("Factura");
+        entRuc.setEnabled(factura);
+        entRazon.setEnabled(factura);
     }
 
     public void mostrar() {
-        if (!autorizado()) { return; }
+        if (!autorizado()) {
+            JOptionPane.showMessageDialog(this, "Acceso denegado", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
         modelo.setNumRows(0);
-        GestionOrdenes g = tienda.getOrdenes();
-        for (int i = 0; i < g.getCont(); i++) {
-            Orden o = g.getOrdenes()[i];
-            if (o.getEstado().equals("Finalizada")) {
-                Comprobante c = tienda.getComprobantes().buscarPorOrden(o.getNumero());
+        GestionOrdenes gestion = tienda.getOrdenes();
+        for (int i = 0; i < gestion.getCont(); i++) {
+            Orden obj = gestion.getOrdenes()[i];
+            if (obj.getEstado().equals("Finalizada")) {
+                Comprobante comp = tienda.getComprobantes().buscarPorOrden(obj.getNumero());
                 String estado = "Sin emitir";
-                if (c != null) { estado = String.format("%s %d", c.getTipo(), c.getNumero()); }
-                modelo.addRow(new Object[]{o.getNumero(), String.format("%s %s", o.getCliente().getNombres(), o.getCliente().getApellidos()), o.getFechaCierre().texto(), String.format("%.2f", o.calcularTotal()), String.format("%.2f", o.saldo()), estado});
+                if (comp != null) {
+                    estado = String.format("%s %d", comp.getTipo(), comp.getNumero());
+                }
+                String cliente = String.format("%s %s", obj.getCliente().getNombres(), obj.getCliente().getApellidos());
+                Object[] fila = {obj.getNumero(), cliente, obj.getFechaCierre().texto(), String.format("%.2f", obj.calcularTotal()), String.format("%.2f", obj.saldo()), estado};
+                modelo.addRow(fila);
             }
         }
     }
 
-    private Orden elegida() {
-        int fila = tabla.getSelectedRow();
-        if (fila == -1) {
-            JOptionPane.showMessageDialog(this, "Seleccione una orden finalizada");
+    public Orden buscarOrden() {
+        if (entNumero.getText().equals("")) {
+            JOptionPane.showMessageDialog(this, "Ingrese el numero de orden", "Error", JOptionPane.ERROR_MESSAGE);
             return null;
         }
-        int num = (int) modelo.getValueAt(fila, 0);
-        int pos = tienda.getOrdenes().buscarPorNumero(num);
-        if (pos == -1) { return null; }
+        int pos = tienda.getOrdenes().buscarPorNumero(Integer.parseInt(entNumero.getText()));
+        if (pos == -1) {
+            JOptionPane.showMessageDialog(this, "Orden no encontrada", "Error", JOptionPane.ERROR_MESSAGE);
+            return null;
+        }
         return tienda.getOrdenes().getOrdenes()[pos];
     }
 
-    private void ver() {
-        if (!autorizado()) { return; }
-        Orden o = elegida();
-        if (o == null) { return; }
-        Comprobante c = tienda.getComprobantes().buscarPorOrden(o.getNumero());
-        if (c == null) {
-            String texto = new Boleta(0, o).mostrarDatos();
-            detalle.setText(String.format("VISTA PREVIA - SIN VALIDEZ\\n%s", texto));
-        } else {
-            detalle.setText(c.mostrarDatos());
+    public void ver() {
+        if (!autorizado()) {
+            JOptionPane.showMessageDialog(this, "Acceso denegado", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
         }
-        detalle.setCaretPosition(0);
+        Orden obj = buscarOrden();
+        if (obj == null) {
+            return;
+        }
+        if (!obj.getEstado().equals("Finalizada")) {
+            JOptionPane.showMessageDialog(this, "La orden aun no esta finalizada", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        Comprobante comp = tienda.getComprobantes().buscarPorOrden(obj.getNumero());
+        if (comp == null) {
+            Boleta previa = new Boleta(0, obj);
+            txtDetalle.setText(String.format("VISTA PREVIA - SIN VALIDEZ\n%s", previa.mostrarDatos()));
+        } else {
+            txtDetalle.setText(comp.mostrarDatos());
+        }
     }
 
-    private void emitir() {
-        if (!autorizado()) { return; }
-        Orden o = elegida();
-        if (o == null) { return; }
-        String mensaje = tienda.getComprobantes().emitir(o, (String) tipo.getSelectedItem(), ruc.getText(), razon.getText());
+    public void emitir() {
+        if (!autorizado()) {
+            JOptionPane.showMessageDialog(this, "Acceso denegado", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        Orden obj = buscarOrden();
+        if (obj == null) {
+            return;
+        }
+        String mensaje = tienda.getComprobantes().emitir(obj, (String) cboTipo.getSelectedItem(), entRuc.getText(), entRazon.getText());
         if (!mensaje.equals("")) {
             JOptionPane.showMessageDialog(this, mensaje, "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        detalle.setText(tienda.getComprobantes().buscarPorOrden(o.getNumero()).mostrarDatos());
-        detalle.setCaretPosition(0);
+        txtDetalle.setText(tienda.getComprobantes().buscarPorOrden(obj.getNumero()).mostrarDatos());
+        JOptionPane.showMessageDialog(this, "Comprobante emitido", "Info", JOptionPane.INFORMATION_MESSAGE);
         mostrar();
-        JOptionPane.showMessageDialog(this, "Comprobante emitido correctamente");
     }
 }

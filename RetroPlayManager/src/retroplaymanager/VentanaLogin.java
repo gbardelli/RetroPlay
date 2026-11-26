@@ -18,19 +18,19 @@ public class VentanaLogin extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         entUsuario = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        entClave = new javax.swing.JTextField();
+        entClave = new javax.swing.JPasswordField();
         btnEntrar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("RetroPlay");
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14));
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel1.setText("Usuario");
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14));
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel2.setText("Contrasena");
 
-        btnEntrar.setFont(new java.awt.Font("Segoe UI", 0, 13));
+        btnEntrar.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
         btnEntrar.setText("Entrar");
         btnEntrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -104,7 +104,7 @@ public class VentanaLogin extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JTextField entUsuario;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JTextField entClave;
+    private javax.swing.JPasswordField entClave;
     private javax.swing.JButton btnEntrar;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables

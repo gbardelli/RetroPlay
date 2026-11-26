@@ -12,14 +12,13 @@ public class GestionJuguetes {
         cont = 0;
     }
 
-    public boolean registrar(Juguete obj) {
+    public boolean registrar(Juguete obj, Fecha fecha) {
         if (cont >= juguetes.length) {
             return false;
         }
         if (buscarPorCodigo(obj.getCodigo()) != -1) {
             return false;
         }
-        Fecha fecha = GestionReportes.leerFecha(obj.getFecha());
         if (fecha == null || obj.getStock() < 0 || !registrarMovimiento(obj.getCategoria(), obj.getStock(), fecha)) {
             return false;
         }
@@ -58,8 +57,13 @@ public class GestionJuguetes {
         return true;
     }
 
-    public MovimientoInventario[] getMovimientos() { return movimientos; }
-    public int getContM() { return contM; }
+    public MovimientoInventario[] getMovimientos() {
+        return movimientos;
+    }
+
+    public int getContM() {
+        return contM;
+    }
 
     public boolean modificar(int pos, Juguete nuevo, Fecha fecha) {
         if (fecha == null || nuevo.getStock() < 0 || contM + 2 > movimientos.length) {
@@ -100,11 +104,24 @@ public class GestionJuguetes {
         cont--;
     }
 
-    public int consultar(String estado, String fecha, Juguete[] destino) {
+    public int posCategoria(String categoria) {
+        if (categoria.equals("Figura de Accion")) {
+            return 0;
+        }
+        if (categoria.equals("Consola Retro")) {
+            return 1;
+        }
+        if (categoria.equals("Juego de Mesa")) {
+            return 2;
+        }
+        return -1;
+    }
+
+    public int consultar(String estado, Fecha fecha, Juguete[] destino) {
         int n = 0;
         for (int i = 0; i < cont; i++) {
             boolean okEstado = estado.equals("") || juguetes[i].getEstado().equals(estado);
-            boolean okFecha = fecha.equals("") || juguetes[i].getFecha().equals(fecha);
+            boolean okFecha = fecha == null || juguetes[i].getFecha().equals(fecha.texto());
             if (okEstado && okFecha) {
                 destino[n] = juguetes[i];
                 n++;

@@ -1,62 +1,12 @@
 package retroplaymanager;
 
 public class GestionReportes {
+
     private Tienda tienda;
     private String[] categorias = {"Figura de Accion", "Consola Retro", "Juego de Mesa"};
 
     public GestionReportes(Tienda tienda) {
         this.tienda = tienda;
-    }
-
-    public static boolean sonDigitos(String texto) {
-        if (texto == null || texto.equals("")) {
-            return false;
-        }
-        for (int i = 0; i < texto.length(); i++) {
-            if (texto.charAt(i) < '0' || texto.charAt(i) > '9') {
-                return false;
-            }
-        }
-        return true;
-    }
-
-    public static Fecha leerFecha(String texto) {
-        if (texto == null || texto.equals("") || texto.length() > 10) {
-            return null;
-        }
-        int[] partes = new int[3];
-        int pos = 0;
-        int digitos = 0;
-        for (int i = 0; i < texto.length(); i++) {
-            char c = texto.charAt(i);
-            if (c == '/') {
-                if (pos == 2 || digitos == 0) {
-                    return null;
-                }
-                pos++;
-                digitos = 0;
-            } else if (c >= '0' && c <= '9') {
-                partes[pos] = partes[pos] * 10 + c - '0';
-                digitos++;
-            } else {
-                return null;
-            }
-        }
-        if (pos != 2 || digitos != 4) {
-            return null;
-        }
-        Fecha f = new Fecha(partes[0], partes[1], partes[2], 0);
-        if (!f.esValida()) {
-            return null;
-        }
-        return f;
-    }
-
-    public static int posCategoria(String categoria) {
-        if (categoria.equals("Figura de Accion")) { return 0; }
-        if (categoria.equals("Consola Retro")) { return 1; }
-        if (categoria.equals("Juego de Mesa")) { return 2; }
-        return -1;
     }
 
     public boolean enPeriodo(Fecha fecha, Fecha desde, Fecha hasta) {
@@ -74,7 +24,7 @@ public class GestionReportes {
         GestionJuguetes g = tienda.getJuguetes();
         for (int i = 0; i < g.getContM(); i++) {
             MovimientoInventario m = g.getMovimientos()[i];
-            int k = posCategoria(m.getCategoria());
+            int k = tienda.getJuguetes().posCategoria(m.getCategoria());
             if (k != -1) {
                 if (m.getDia() < desde.totalDias()) {
                     inicial[k] += m.getCantidad();
@@ -134,7 +84,9 @@ public class GestionReportes {
 
     private int buscarPersona(String dni, String[] dnis, int cont) {
         for (int i = 0; i < cont; i++) {
-            if (dnis[i].equals(dni)) { return i; }
+            if (dnis[i].equals(dni)) {
+                return i;
+            }
         }
         return -1;
     }
@@ -189,7 +141,9 @@ public class GestionReportes {
                         verificadas[k]++;
                         for (int z = 0; z < o.getContD(); z++) {
                             DetalleOrden d = o.getDetalles()[z];
-                            if (d.getTipo().equals("Paquete")) { paquetes[k] += d.getCantidad(); }
+                            if (d.getTipo().equals("Paquete")) {
+                                paquetes[k] += d.getCantidad();
+                            }
                         }
                         break;
                     }
@@ -234,9 +188,15 @@ public class GestionReportes {
         for (int i = 0; i < cont; i++) {
             for (int j = i + 1; j < cont; j++) {
                 if (compras[i] < compras[j]) {
-                    int aux = compras[i]; compras[i] = compras[j]; compras[j] = aux;
-                    String texto = dnis[i]; dnis[i] = dnis[j]; dnis[j] = texto;
-                    texto = nombres[i]; nombres[i] = nombres[j]; nombres[j] = texto;
+                    int aux = compras[i];
+                    compras[i] = compras[j];
+                    compras[j] = aux;
+                    String texto = dnis[i];
+                    dnis[i] = dnis[j];
+                    dnis[j] = texto;
+                    texto = nombres[i];
+                    nombres[i] = nombres[j];
+                    nombres[j] = texto;
                 }
             }
         }

@@ -49,9 +49,13 @@ public class Tienda {
         return ordenes;
     }
 
-    public GestionComprobantes getComprobantes() { return comprobantes; }
+    public GestionComprobantes getComprobantes() {
+        return comprobantes;
+    }
 
-    public GestionReportes getReportes() { return reportes; }
+    public GestionReportes getReportes() {
+        return reportes;
+    }
 
     public Empleado getSesion() {
         return sesion;

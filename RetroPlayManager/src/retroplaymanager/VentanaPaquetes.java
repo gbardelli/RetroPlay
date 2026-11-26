@@ -38,19 +38,19 @@ public class VentanaPaquetes extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Paquetes");
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14));
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel1.setText("Nombre");
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14));
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel2.setText("Precio cerrado");
 
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 14));
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel3.setText("Codigo juguete");
 
-        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 14));
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel4.setText("Codigo servicio");
 
-        btnRegistrar.setFont(new java.awt.Font("Segoe UI", 0, 13));
+        btnRegistrar.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
         btnRegistrar.setText("Registrar");
         btnRegistrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -58,7 +58,7 @@ public class VentanaPaquetes extends javax.swing.JFrame {
             }
         });
 
-        btnJuguete.setFont(new java.awt.Font("Segoe UI", 0, 13));
+        btnJuguete.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
         btnJuguete.setText("Agregar juguete");
         btnJuguete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -66,7 +66,7 @@ public class VentanaPaquetes extends javax.swing.JFrame {
             }
         });
 
-        btnServicio.setFont(new java.awt.Font("Segoe UI", 0, 13));
+        btnServicio.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
         btnServicio.setText("Agregar servicio");
         btnServicio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -74,7 +74,7 @@ public class VentanaPaquetes extends javax.swing.JFrame {
             }
         });
 
-        btnEliminar.setFont(new java.awt.Font("Segoe UI", 0, 13));
+        btnEliminar.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
         btnEliminar.setText("Eliminar");
         btnEliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -82,7 +82,7 @@ public class VentanaPaquetes extends javax.swing.JFrame {
             }
         });
 
-        btnMostrar.setFont(new java.awt.Font("Segoe UI", 0, 13));
+        btnMostrar.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
         btnMostrar.setText("Mostrar");
         btnMostrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -159,7 +159,7 @@ public class VentanaPaquetes extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
         );
 
-        Datos.setFont(new java.awt.Font("Segoe UI", 0, 13));
+        Datos.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
         Datos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {},
             new String [] { "Nombre", "Precio", "Incluye" }

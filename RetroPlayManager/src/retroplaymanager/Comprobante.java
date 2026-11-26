@@ -1,6 +1,7 @@
 package retroplaymanager;
 
 public abstract class Comprobante {
+
     protected int numero;
     protected Orden orden;
     private String detalle;
@@ -19,8 +20,14 @@ public abstract class Comprobante {
     public abstract String getTipo();
     public abstract String datosTributarios();
 
-    public int getNumero() { return numero; }
-    public Orden getOrden() { return orden; }
+    public int getNumero() {
+        return numero;
+    }
+
+    public Orden getOrden() {
+        return orden;
+    }
+
     public String mostrarDatos() {
         return String.format("%s Nro. %d\n%s%s", getTipo(), numero, datosTributarios(), detalle);
     }

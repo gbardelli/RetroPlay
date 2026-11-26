@@ -109,7 +109,7 @@
             <Property name="text" type="java.lang.String" value="Contrasena"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="entClave">
+        <Component class="javax.swing.JPasswordField" name="entClave">
         </Component>
         <Component class="javax.swing.JButton" name="btnEntrar">
           <Properties>

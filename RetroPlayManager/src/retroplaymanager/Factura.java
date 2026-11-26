@@ -11,7 +11,9 @@ public class Factura extends Comprobante implements Fiscal {
     }
 
     @Override
-    public String getTipo() { return "Factura"; }
+    public String getTipo() {
+        return "Factura";
+    }
 
     @Override
     public String datosTributarios() {

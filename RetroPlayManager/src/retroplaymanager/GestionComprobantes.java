@@ -1,6 +1,7 @@
 package retroplaymanager;
 
 public class GestionComprobantes {
+
     private Comprobante[] comprobantes;
     private int cont;
     private int correlativo;
@@ -32,8 +33,8 @@ public class GestionComprobantes {
         }
         Comprobante obj;
         if (tipo.equals("Factura")) {
-            if (ruc.length() != 11 || !GestionReportes.sonDigitos(ruc) || razonSocial.equals("")) {
-                return "Ingrese un RUC de 11 digitos y la razon social";
+            if (ruc.equals("") || razonSocial.equals("")) {
+                return "Para una factura ingrese el RUC y la razon social";
             }
             obj = new Factura(correlativo + 1, orden, ruc, razonSocial);
         } else if (tipo.equals("Boleta")) {
@@ -47,6 +48,11 @@ public class GestionComprobantes {
         return "";
     }
 
-    public Comprobante[] getComprobantes() { return comprobantes; }
-    public int getCont() { return cont; }
+    public Comprobante[] getComprobantes() {
+        return comprobantes;
+    }
+
+    public int getCont() {
+        return cont;
+    }
 }

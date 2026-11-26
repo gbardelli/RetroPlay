@@ -49,10 +49,10 @@ public class VentanaMenu extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("RetroPlay");
 
-        lblTitulo.setFont(new java.awt.Font("Segoe UI", 1, 16));
+        lblTitulo.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         lblTitulo.setText("Menu");
 
-        btnPersonal.setFont(new java.awt.Font("Segoe UI", 0, 14));
+        btnPersonal.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnPersonal.setText("Personal");
         btnPersonal.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -60,7 +60,7 @@ public class VentanaMenu extends javax.swing.JFrame {
             }
         });
 
-        btnJuguetes.setFont(new java.awt.Font("Segoe UI", 0, 14));
+        btnJuguetes.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnJuguetes.setText("Juguetes");
         btnJuguetes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -68,7 +68,7 @@ public class VentanaMenu extends javax.swing.JFrame {
             }
         });
 
-        btnServicios.setFont(new java.awt.Font("Segoe UI", 0, 14));
+        btnServicios.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnServicios.setText("Servicios");
         btnServicios.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -76,7 +76,7 @@ public class VentanaMenu extends javax.swing.JFrame {
             }
         });
 
-        btnPaquetes.setFont(new java.awt.Font("Segoe UI", 0, 14));
+        btnPaquetes.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnPaquetes.setText("Paquetes");
         btnPaquetes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -84,7 +84,7 @@ public class VentanaMenu extends javax.swing.JFrame {
             }
         });
 
-        btnInventario.setFont(new java.awt.Font("Segoe UI", 0, 14));
+        btnInventario.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnInventario.setText("Inventario");
         btnInventario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -92,7 +92,7 @@ public class VentanaMenu extends javax.swing.JFrame {
             }
         });
 
-        btnReportes.setFont(new java.awt.Font("Segoe UI", 0, 14));
+        btnReportes.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnReportes.setText("Reportes");
         btnReportes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -100,7 +100,7 @@ public class VentanaMenu extends javax.swing.JFrame {
             }
         });
 
-        btnClientes.setFont(new java.awt.Font("Segoe UI", 0, 14));
+        btnClientes.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnClientes.setText("Clientes");
         btnClientes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -108,7 +108,7 @@ public class VentanaMenu extends javax.swing.JFrame {
             }
         });
 
-        btnOrdenes.setFont(new java.awt.Font("Segoe UI", 0, 14));
+        btnOrdenes.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnOrdenes.setText("Ordenes");
         btnOrdenes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -116,7 +116,7 @@ public class VentanaMenu extends javax.swing.JFrame {
             }
         });
 
-        btnComprobante.setFont(new java.awt.Font("Segoe UI", 0, 14));
+        btnComprobante.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnComprobante.setText("Comprobante");
         btnComprobante.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

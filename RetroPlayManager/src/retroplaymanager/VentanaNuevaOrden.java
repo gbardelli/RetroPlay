@@ -57,25 +57,25 @@ public class VentanaNuevaOrden extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Nueva orden");
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14));
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel1.setText("DNI cliente");
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14));
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel2.setText("Tipo (Venta / Apartado)");
 
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 14));
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel3.setText("Entrega (Tienda / Delivery)");
 
-        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 14));
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel4.setText("Fecha registro (d m a)");
 
-        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 14));
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel5.setText("Fecha entrega (d m a)");
 
-        jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 14));
+        jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel6.setText("Hora entrega (0 - 23)");
 
-        btnNueva.setFont(new java.awt.Font("Segoe UI", 0, 13));
+        btnNueva.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
         btnNueva.setText("Nueva orden");
         btnNueva.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -83,16 +83,16 @@ public class VentanaNuevaOrden extends javax.swing.JFrame {
             }
         });
 
-        lblOrden.setFont(new java.awt.Font("Segoe UI", 1, 13));
+        lblOrden.setFont(new java.awt.Font("Segoe UI", 1, 13)); // NOI18N
         lblOrden.setText("No hay una orden en armado");
 
-        jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 14));
+        jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel7.setText("Codigo o paquete");
 
-        jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 14));
+        jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel8.setText("Cantidad");
 
-        btnJuguete.setFont(new java.awt.Font("Segoe UI", 0, 13));
+        btnJuguete.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
         btnJuguete.setText("Agregar juguete");
         btnJuguete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -100,7 +100,7 @@ public class VentanaNuevaOrden extends javax.swing.JFrame {
             }
         });
 
-        btnServicio.setFont(new java.awt.Font("Segoe UI", 0, 13));
+        btnServicio.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
         btnServicio.setText("Agregar servicio");
         btnServicio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -108,7 +108,7 @@ public class VentanaNuevaOrden extends javax.swing.JFrame {
             }
         });
 
-        btnPaquete.setFont(new java.awt.Font("Segoe UI", 0, 13));
+        btnPaquete.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
         btnPaquete.setText("Agregar paquete");
         btnPaquete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -116,7 +116,7 @@ public class VentanaNuevaOrden extends javax.swing.JFrame {
             }
         });
 
-        btnQuitar.setFont(new java.awt.Font("Segoe UI", 0, 13));
+        btnQuitar.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
         btnQuitar.setText("Quitar");
         btnQuitar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -124,7 +124,7 @@ public class VentanaNuevaOrden extends javax.swing.JFrame {
             }
         });
 
-        btnRegistrar.setFont(new java.awt.Font("Segoe UI", 1, 13));
+        btnRegistrar.setFont(new java.awt.Font("Segoe UI", 1, 13)); // NOI18N
         btnRegistrar.setText("Registrar orden");
         btnRegistrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -132,7 +132,7 @@ public class VentanaNuevaOrden extends javax.swing.JFrame {
             }
         });
 
-        btnVolver.setFont(new java.awt.Font("Segoe UI", 1, 14));
+        btnVolver.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnVolver.setText("<--");
         btnVolver.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -255,14 +255,14 @@ public class VentanaNuevaOrden extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
         );
 
-        Datos.setFont(new java.awt.Font("Segoe UI", 0, 13));
+        Datos.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
         Datos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {},
             new String [] { "Tipo", "Codigo", "Nombre", "Categoria", "Cantidad", "Precio", "Subtotal" }
         ));
         jScrollPane1.setViewportView(Datos);
 
-        lblTotal.setFont(new java.awt.Font("Segoe UI", 1, 14));
+        lblTotal.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lblTotal.setText("Total: S/ 0.00");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);

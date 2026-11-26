@@ -161,11 +161,17 @@ public abstract class Orden {
         return totalJuguetes() - descuento() + totalServicios() + totalPaquetes() + costoEnvio;
     }
 
-    public double calcularIGV() { return calcularSubtotal() * 0.18; }
+    public double calcularIGV() {
+        return calcularSubtotal() * 0.18;
+    }
 
-    public double calcularTotal() { return calcularSubtotal() + calcularIGV(); }
+    public double calcularTotal() {
+        return calcularSubtotal() + calcularIGV();
+    }
 
-    public int[] getVendidosCategoria() { return vendidosCategoria; }
+    public int[] getVendidosCategoria() {
+        return vendidosCategoria;
+    }
 
     public void registrarCategorias(Tienda tienda) {
         vendidosCategoria = new int[3];
@@ -177,7 +183,7 @@ public abstract class Orden {
                 if (pos != -1) {
                     cat = tienda.getJuguetes().getJuguetes()[pos].getCategoria();
                 }
-                sumarCategoria(cat, d.getCantidad());
+                sumarCategoria(tienda, cat, d.getCantidad());
             }
             if (d.getTipo().equals("Paquete")) {
                 int pos = tienda.getPaquetes().buscarPorNombre(d.getCodigo());
@@ -189,15 +195,15 @@ public abstract class Orden {
                         if (k != -1) {
                             juguete = tienda.getJuguetes().getJuguetes()[k];
                         }
-                        sumarCategoria(juguete.getCategoria(), d.getCantidad());
+                        sumarCategoria(tienda, juguete.getCategoria(), d.getCantidad());
                     }
                 }
             }
         }
     }
 
-    private void sumarCategoria(String categoria, int cantidad) {
-        int pos = GestionReportes.posCategoria(categoria);
+    private void sumarCategoria(Tienda tienda, String categoria, int cantidad) {
+        int pos = tienda.getJuguetes().posCategoria(categoria);
         if (pos != -1) {
             vendidosCategoria[pos] += cantidad;
         }
