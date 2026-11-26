@@ -7,6 +7,7 @@ public class Tienda {
     private GestionClientes clientes;
     private GestionServicios servicios;
     private GestionPaquetes paquetes;
+    private GestionOrdenes ordenes;
     private Empleado sesion;
 
     public Tienda() {
@@ -15,6 +16,7 @@ public class Tienda {
         clientes = new GestionClientes();
         servicios = new GestionServicios();
         paquetes = new GestionPaquetes();
+        ordenes = new GestionOrdenes();
         Empleado admin = new Empleado("00000000", "Admin", "General", "admin", "admin", "Administrador");
         empleados.registrar(admin);
     }
@@ -37,6 +39,10 @@ public class Tienda {
 
     public GestionPaquetes getPaquetes() {
         return paquetes;
+    }
+
+    public GestionOrdenes getOrdenes() {
+        return ordenes;
     }
 
     public Empleado getSesion() {
