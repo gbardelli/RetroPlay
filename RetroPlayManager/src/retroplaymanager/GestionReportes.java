@@ -3,7 +3,7 @@ package retroplaymanager;
 public class GestionReportes {
 
     private Tienda tienda;
-    private String[] categorias = {"Figura de Accion", "Consola Retro", "Juego de Mesa"};
+    private String[] categorias = {"Figura de Acción", "Consola Retro", "Juego de Mesa"};
 
     public GestionReportes(Tienda tienda) {
         this.tienda = tienda;
@@ -129,7 +129,7 @@ public class GestionReportes {
             if (a != null) {
                 for (int j = 0; j < o.getContH(); j++) {
                     HistorialOrden h = o.getHistorial()[j];
-                    if (h.getEstadoNuevo().equals("En Preparacion") && enPeriodo(h.getFecha(), desde, hasta)) {
+                    if (h.getEstadoNuevo().equals("En Preparación") && enPeriodo(h.getFecha(), desde, hasta)) {
                         int k = buscarPersona(a.getDni(), dnis, cont);
                         if (k == -1) {
                             k = cont;

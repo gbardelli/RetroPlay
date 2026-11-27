@@ -6,10 +6,44 @@ public class GestionJuguetes {
     private int cont;
     private MovimientoInventario[] movimientos = new MovimientoInventario[5000];
     private int contM = 0;
+    private String[] estados;
+    private String[] categorias;
 
     public GestionJuguetes() {
         juguetes = new Juguete[50];
         cont = 0;
+        estados = new String[]{"Disponible", "Vendido", "En Restauración", "Apartado"};
+        categorias = new String[]{"Figura de Acción", "Consola Retro", "Juego de Mesa"};
+    }
+
+    public boolean estadoValido(String estado) {
+        for (int i = 0; i < estados.length; i++) {
+            if (estados[i].equals(estado)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public String validar(int anio, double precio, int stock) {
+        if (anio < 1900 || anio > 2026) {
+            return "El anio de fabricacion debe estar entre 1900 y 2026";
+        }
+        if (precio <= 0) {
+            return "El precio debe ser mayor a cero";
+        }
+        if (stock < 0) {
+            return "El stock no puede ser negativo";
+        }
+        return "";
+    }
+
+    public String[] getEstados() {
+        return estados;
+    }
+
+    public String[] getCategorias() {
+        return categorias;
     }
 
     public boolean registrar(Juguete obj, Fecha fecha) {
@@ -102,10 +136,11 @@ public class GestionJuguetes {
             juguetes[i] = juguetes[i + 1];
         }
         cont--;
+        juguetes[cont] = null;
     }
 
     public int posCategoria(String categoria) {
-        if (categoria.equals("Figura de Accion")) {
+        if (categoria.equals("Figura de Acción")) {
             return 0;
         }
         if (categoria.equals("Consola Retro")) {
@@ -131,7 +166,7 @@ public class GestionJuguetes {
     }
 
     public Juguete crear(String categoria, String codigo, String nombre, int anio, double precioBase, int stock, String estado, String fecha) {
-        if (categoria.equals("Figura de Accion")) {
+        if (categoria.equals("Figura de Acción")) {
             return new FiguraAccion(codigo, nombre, anio, precioBase, stock, estado, fecha);
         }
         if (categoria.equals("Consola Retro")) {

@@ -53,18 +53,18 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="cboTipo" min="-2" pref="220" max="-2" attributes="0"/>
                       <Group type="102" alignment="0" attributes="0">
-                          <Component id="entDiaD" min="-2" pref="40" max="-2" attributes="0"/>
+                          <Component id="cboDiaD" min="-2" pref="62" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="entMesD" min="-2" pref="40" max="-2" attributes="0"/>
+                          <Component id="cboMesD" min="-2" pref="62" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="entAnioD" min="-2" pref="60" max="-2" attributes="0"/>
+                          <Component id="cboAnioD" min="-2" pref="82" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
-                          <Component id="entDiaH" min="-2" pref="40" max="-2" attributes="0"/>
+                          <Component id="cboDiaH" min="-2" pref="62" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="entMesH" min="-2" pref="40" max="-2" attributes="0"/>
+                          <Component id="cboMesH" min="-2" pref="62" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="entAnioH" min="-2" pref="60" max="-2" attributes="0"/>
+                          <Component id="cboAnioH" min="-2" pref="82" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace max="32767" attributes="0"/>
@@ -87,16 +87,16 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="lblDesde" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="entDiaD" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="entMesD" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="entAnioD" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="cboDiaD" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="cboMesD" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="cboAnioD" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="lblHasta" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="entDiaH" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="entMesH" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="entAnioH" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="cboDiaH" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="cboMesH" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="cboAnioH" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
@@ -139,11 +139,41 @@
             <Property name="text" type="java.lang.String" value="Desde"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="entDiaD">
+        <Component class="javax.swing.JComboBox" name="cboDiaD">
+          <Properties>
+            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+              <StringArray count="1">
+                <StringItem index="0" value="Dia"/>
+              </StringArray>
+            </Property>
+          </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+          </AuxValues>
         </Component>
-        <Component class="javax.swing.JTextField" name="entMesD">
+        <Component class="javax.swing.JComboBox" name="cboMesD">
+          <Properties>
+            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+              <StringArray count="1">
+                <StringItem index="0" value="Mes"/>
+              </StringArray>
+            </Property>
+          </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+          </AuxValues>
         </Component>
-        <Component class="javax.swing.JTextField" name="entAnioD">
+        <Component class="javax.swing.JComboBox" name="cboAnioD">
+          <Properties>
+            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+              <StringArray count="1">
+                <StringItem index="0" value="Anio"/>
+              </StringArray>
+            </Property>
+          </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+          </AuxValues>
         </Component>
         <Component class="javax.swing.JLabel" name="lblHasta">
           <Properties>
@@ -153,11 +183,41 @@
             <Property name="text" type="java.lang.String" value="Hasta"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="entDiaH">
+        <Component class="javax.swing.JComboBox" name="cboDiaH">
+          <Properties>
+            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+              <StringArray count="1">
+                <StringItem index="0" value="Dia"/>
+              </StringArray>
+            </Property>
+          </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+          </AuxValues>
         </Component>
-        <Component class="javax.swing.JTextField" name="entMesH">
+        <Component class="javax.swing.JComboBox" name="cboMesH">
+          <Properties>
+            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+              <StringArray count="1">
+                <StringItem index="0" value="Mes"/>
+              </StringArray>
+            </Property>
+          </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+          </AuxValues>
         </Component>
-        <Component class="javax.swing.JTextField" name="entAnioH">
+        <Component class="javax.swing.JComboBox" name="cboAnioH">
+          <Properties>
+            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+              <StringArray count="1">
+                <StringItem index="0" value="Anio"/>
+              </StringArray>
+            </Property>
+          </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+          </AuxValues>
         </Component>
         <Component class="javax.swing.JButton" name="btnGenerar">
           <Properties>

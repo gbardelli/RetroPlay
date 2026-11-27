@@ -5,19 +5,33 @@ import javax.swing.JOptionPane;
 public class VentanaPersonal extends javax.swing.JFrame {
 
     private Tienda tienda;
+    private Entradas entradas = new Entradas();
     private javax.swing.table.DefaultTableModel modelo;
 
     public VentanaPersonal(Tienda tienda) {
         this.tienda = tienda;
         initComponents();
         modelo = (javax.swing.table.DefaultTableModel) Datos.getModel();
+        for (int i = 0; i < tienda.getEmpleados().getRoles().length; i++) {
+            cboRol.addItem(tienda.getEmpleados().getRoles()[i]);
+        }
+        cargarLista();
         mostrar();
+        retroplaymanager.apariencia.Apariencia.vestir(this);
     }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
         jPanel1 = new javax.swing.JPanel();
+        lblElegir = new javax.swing.JLabel();
+        cboElegir = new javax.swing.JComboBox<>();
+        cboElegir.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione para editar..." }));
+        cboElegir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cboElegirActionPerformed(evt);
+            }
+        });
         jLabel1 = new javax.swing.JLabel();
         entDni = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
@@ -27,9 +41,10 @@ public class VentanaPersonal extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         entUsuario = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        entClave = new javax.swing.JTextField();
+        entClave = new javax.swing.JPasswordField();
         jLabel6 = new javax.swing.JLabel();
-        entRol = new javax.swing.JTextField();
+        cboRol = new javax.swing.JComboBox<>();
+        cboRol.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione..." }));
         btnRegistrar = new javax.swing.JButton();
         btnModificar = new javax.swing.JButton();
         btnEliminar = new javax.swing.JButton();
@@ -40,6 +55,9 @@ public class VentanaPersonal extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Personal");
+
+        lblElegir.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lblElegir.setText("Editar existente");
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel1.setText("DNI");
@@ -98,6 +116,7 @@ public class VentanaPersonal extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(lblElegir)
                         .addComponent(jLabel1)
                         .addComponent(jLabel2)
                         .addComponent(jLabel3)
@@ -107,12 +126,13 @@ public class VentanaPersonal extends javax.swing.JFrame {
                 )
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(cboElegir, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(entDni, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(entNombres, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(entApellidos, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(entUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(entClave, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(entRol, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(cboRol, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
                 )
                 .addGap(18, 18, 18))
 
@@ -129,6 +149,10 @@ public class VentanaPersonal extends javax.swing.JFrame {
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createSequentialGroup()
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblElegir)
+                    .addComponent(cboElegir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
 
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -153,7 +177,7 @@ public class VentanaPersonal extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(entRol, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cboRol, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
 
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -216,6 +240,10 @@ public class VentanaPersonal extends javax.swing.JFrame {
         registrar();
     }//GEN-LAST:event_btnRegistrarActionPerformed
 
+    private void cboElegirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboElegirActionPerformed
+        cargarSeleccion();
+    }//GEN-LAST:event_cboElegirActionPerformed
+
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
         modificar();
     }//GEN-LAST:event_btnModificarActionPerformed
@@ -226,9 +254,12 @@ public class VentanaPersonal extends javax.swing.JFrame {
 
     private void btnMostrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMostrarActionPerformed
         mostrar();
+        cargarLista();
     }//GEN-LAST:event_btnMostrarActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel lblElegir;
+    private javax.swing.JComboBox<String> cboElegir;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JTextField entDni;
     private javax.swing.JLabel jLabel2;
@@ -238,9 +269,9 @@ public class VentanaPersonal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JTextField entUsuario;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JTextField entClave;
+    private javax.swing.JPasswordField entClave;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JTextField entRol;
+    private javax.swing.JComboBox<String> cboRol;
     private javax.swing.JButton btnRegistrar;
     private javax.swing.JButton btnModificar;
     private javax.swing.JButton btnEliminar;
@@ -251,18 +282,11 @@ public class VentanaPersonal extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 
-    public boolean rolValido(String rol) {
-        if (rol.equals("Administrador") || rol.equals("Vendedor") || rol.equals("Almacenero")) {
-            return true;
-        }
-        return false;
-    }
-
     public boolean vacio() {
         if (entDni.getText().equals("") || entNombres.getText().equals("") || entApellidos.getText().equals("")) {
             return true;
         }
-        if (entUsuario.getText().equals("") || entClave.getText().equals("") || entRol.getText().equals("")) {
+        if (entUsuario.getText().equals("") || entClave.getText().equals("") || entradas.elegido(cboRol).equals("")) {
             return true;
         }
         return false;
@@ -278,7 +302,12 @@ public class VentanaPersonal extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Complete los datos", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        if (!rolValido(entRol.getText())) {
+        String mensaje = gestion.validar(entDni.getText(), entNombres.getText(), entApellidos.getText(), entUsuario.getText(), entClave.getText());
+        if (!mensaje.equals("")) {
+            JOptionPane.showMessageDialog(this, mensaje, "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        if (!gestion.rolValido(entradas.elegido(cboRol))) {
             JOptionPane.showMessageDialog(this, "Rol no permitido", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
@@ -290,10 +319,11 @@ public class VentanaPersonal extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Usuario repetido", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        Empleado obj = new Empleado(entDni.getText(), entNombres.getText(), entApellidos.getText(), entUsuario.getText(), entClave.getText(), entRol.getText());
+        Empleado obj = new Empleado(entDni.getText(), entNombres.getText(), entApellidos.getText(), entUsuario.getText(), entClave.getText(), entradas.elegido(cboRol));
         gestion.registrar(obj);
         JOptionPane.showMessageDialog(this, "Empleado registrado", "Info", JOptionPane.INFORMATION_MESSAGE);
         limpiar();
+        cargarLista();
         mostrar();
     }
 
@@ -308,7 +338,12 @@ public class VentanaPersonal extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Complete los datos", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        if (!rolValido(entRol.getText())) {
+        String mensaje = gestion.validar(entDni.getText(), entNombres.getText(), entApellidos.getText(), entUsuario.getText(), entClave.getText());
+        if (!mensaje.equals("")) {
+            JOptionPane.showMessageDialog(this, mensaje, "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        if (!gestion.rolValido(entradas.elegido(cboRol))) {
             JOptionPane.showMessageDialog(this, "Rol no permitido", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
@@ -321,8 +356,10 @@ public class VentanaPersonal extends javax.swing.JFrame {
         obj.setApellidos(entApellidos.getText());
         obj.setUsuario(entUsuario.getText());
         obj.setContrasena(entClave.getText());
-        obj.setRol(entRol.getText());
+        obj.setRol(entradas.elegido(cboRol));
         JOptionPane.showMessageDialog(this, "Empleado modificado", "Info", JOptionPane.INFORMATION_MESSAGE);
+        limpiar();
+        cargarLista();
         mostrar();
     }
 
@@ -336,6 +373,7 @@ public class VentanaPersonal extends javax.swing.JFrame {
         gestion.eliminar(pos);
         JOptionPane.showMessageDialog(this, "Empleado eliminado", "Info", JOptionPane.INFORMATION_MESSAGE);
         limpiar();
+        cargarLista();
         mostrar();
     }
 
@@ -343,17 +381,52 @@ public class VentanaPersonal extends javax.swing.JFrame {
         modelo.setNumRows(0);
         Empleado[] lista = tienda.getEmpleados().getEmpleados();
         for (int i = 0; i < tienda.getEmpleados().getCont(); i++) {
-            Object[] fila = {lista[i].getDni(), lista[i].getNombres(), lista[i].getApellidos(), lista[i].getUsuario(), lista[i].getContrasena(), lista[i].getRol()};
+            Object[] fila = {lista[i].getDni(), lista[i].getNombres(), lista[i].getApellidos(), lista[i].getUsuario(), "******", lista[i].getRol()};
             modelo.addRow(fila);
         }
     }
 
-    public void limpiar() {
+    public void vaciarCampos() {
         entDni.setText(null);
         entNombres.setText(null);
         entApellidos.setText(null);
         entUsuario.setText(null);
         entClave.setText(null);
-        entRol.setText(null);
+        cboRol.setSelectedIndex(0);
+    }
+
+    public void limpiar() {
+        vaciarCampos();
+        cboElegir.setSelectedIndex(0);
+    }
+
+    public void cargarLista() {
+        cboElegir.removeAllItems();
+        cboElegir.addItem("Seleccione para editar...");
+        for (int i = 0; i < tienda.getEmpleados().getCont(); i++) {
+            Empleado obj = tienda.getEmpleados().getEmpleados()[i];
+            cboElegir.addItem(String.format("%s - %s %s", obj.getDni(), obj.getNombres(), obj.getApellidos()));
+        }
+    }
+
+    public void cargarSeleccion() {
+        if (cboElegir.getSelectedIndex() == -1) {
+            return;
+        }
+        if (cboElegir.getSelectedIndex() == 0) {
+            vaciarCampos();
+            return;
+        }
+        int pos = tienda.getEmpleados().buscarPorDni(entradas.codigoDe(entradas.elegido(cboElegir)));
+        if (pos == -1) {
+            return;
+        }
+        Empleado obj = tienda.getEmpleados().getEmpleados()[pos];
+        entDni.setText(obj.getDni());
+        entNombres.setText(obj.getNombres());
+        entApellidos.setText(obj.getApellidos());
+        entUsuario.setText(obj.getUsuario());
+        entClave.setText(obj.getContrasena());
+        entradas.seleccionar(cboRol, obj.getRol());
     }
 }

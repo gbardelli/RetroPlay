@@ -10,6 +10,13 @@ public class GestionPaquetes {
         cont = 0;
     }
 
+    public String validarPrecio(double precio) {
+        if (precio <= 0) {
+            return "El precio debe ser mayor a cero";
+        }
+        return "";
+    }
+
     public boolean registrar(Paquete obj) {
         if (cont >= paquetes.length) {
             return false;
@@ -36,6 +43,7 @@ public class GestionPaquetes {
             paquetes[i] = paquetes[i + 1];
         }
         cont--;
+        paquetes[cont] = null;
     }
 
     public Paquete[] getPaquetes() {

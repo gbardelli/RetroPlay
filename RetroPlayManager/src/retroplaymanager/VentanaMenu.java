@@ -28,6 +28,7 @@ public class VentanaMenu extends javax.swing.JFrame {
             btnOrdenes.setVisible(false);
         }
         pack();
+        retroplaymanager.apariencia.Apariencia.vestir(this);
     }
 
     @SuppressWarnings("unchecked")
@@ -45,6 +46,7 @@ public class VentanaMenu extends javax.swing.JFrame {
         btnClientes = new javax.swing.JButton();
         btnOrdenes = new javax.swing.JButton();
         btnComprobante = new javax.swing.JButton();
+        btnSesion = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("RetroPlay");
@@ -124,6 +126,13 @@ public class VentanaMenu extends javax.swing.JFrame {
             }
         });
 
+        btnSesion.setText("Cerrar sesion");
+        btnSesion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSesionActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -140,7 +149,8 @@ public class VentanaMenu extends javax.swing.JFrame {
                     .addComponent(btnReportes, javax.swing.GroupLayout.DEFAULT_SIZE, 220, Short.MAX_VALUE)
                     .addComponent(btnClientes, javax.swing.GroupLayout.DEFAULT_SIZE, 220, Short.MAX_VALUE)
                     .addComponent(btnOrdenes, javax.swing.GroupLayout.DEFAULT_SIZE, 220, Short.MAX_VALUE)
-                    .addComponent(btnComprobante, javax.swing.GroupLayout.DEFAULT_SIZE, 220, Short.MAX_VALUE))
+                    .addComponent(btnComprobante, javax.swing.GroupLayout.DEFAULT_SIZE, 220, Short.MAX_VALUE)
+                    .addComponent(btnSesion, javax.swing.GroupLayout.DEFAULT_SIZE, 220, Short.MAX_VALUE))
                 .addGap(24, 24, 24))
         );
         jPanel1Layout.setVerticalGroup(
@@ -165,6 +175,8 @@ public class VentanaMenu extends javax.swing.JFrame {
                 .addComponent(btnOrdenes, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(8, 8, 8)
                 .addComponent(btnComprobante, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(8, 8, 8)
+                .addComponent(btnSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
         );
 
@@ -219,6 +231,16 @@ public class VentanaMenu extends javax.swing.JFrame {
         abrir("comprobante");
     }//GEN-LAST:event_btnComprobanteActionPerformed
 
+    private void btnSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSesionActionPerformed
+        tienda.setSesion(null);
+        java.awt.Frame[] ventanas = java.awt.Frame.getFrames();
+        for (int i = 0; i < ventanas.length; i++) {
+            ventanas[i].dispose();
+        }
+        VentanaLogin obj = new VentanaLogin(tienda);
+        obj.setVisible(true);
+    }//GEN-LAST:event_btnSesionActionPerformed
+
     public void abrir(String destino) {
         if (destino.equals("personal")) {
             new VentanaPersonal(tienda).setVisible(true);
@@ -259,6 +281,7 @@ public class VentanaMenu extends javax.swing.JFrame {
     private javax.swing.JButton btnPersonal;
     private javax.swing.JButton btnReportes;
     private javax.swing.JButton btnServicios;
+    private javax.swing.JButton btnSesion;
     private javax.swing.JLabel lblTitulo;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables

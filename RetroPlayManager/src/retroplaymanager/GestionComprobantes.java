@@ -2,6 +2,7 @@ package retroplaymanager;
 
 public class GestionComprobantes {
 
+    private Reglas reglas = new Reglas();
     private Comprobante[] comprobantes;
     private int cont;
     private int correlativo;
@@ -35,6 +36,9 @@ public class GestionComprobantes {
         if (tipo.equals("Factura")) {
             if (ruc.equals("") || razonSocial.equals("")) {
                 return "Para una factura ingrese el RUC y la razon social";
+            }
+            if (!reglas.soloDigitos(ruc, 11)) {
+                return "El RUC debe tener 11 digitos";
             }
             obj = new Factura(correlativo + 1, orden, ruc, razonSocial);
         } else if (tipo.equals("Boleta")) {

@@ -5,19 +5,30 @@ import javax.swing.JOptionPane;
 public class VentanaServicios extends javax.swing.JFrame {
 
     private Tienda tienda;
+    private Entradas entradas = new Entradas();
     private javax.swing.table.DefaultTableModel modelo;
 
     public VentanaServicios(Tienda tienda) {
         this.tienda = tienda;
         initComponents();
         modelo = (javax.swing.table.DefaultTableModel) Datos.getModel();
+        cargarLista();
         mostrar();
+        retroplaymanager.apariencia.Apariencia.vestir(this);
     }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
         jPanel1 = new javax.swing.JPanel();
+        lblElegir = new javax.swing.JLabel();
+        cboElegir = new javax.swing.JComboBox<>();
+        cboElegir.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione para editar..." }));
+        cboElegir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cboElegirActionPerformed(evt);
+            }
+        });
         jLabel1 = new javax.swing.JLabel();
         entCodigo = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
@@ -36,6 +47,9 @@ public class VentanaServicios extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Servicios");
+
+        lblElegir.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lblElegir.setText("Editar existente");
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel1.setText("Codigo");
@@ -88,6 +102,7 @@ public class VentanaServicios extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(lblElegir)
                         .addComponent(jLabel1)
                         .addComponent(jLabel2)
                         .addComponent(jLabel3)
@@ -95,6 +110,7 @@ public class VentanaServicios extends javax.swing.JFrame {
                 )
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(cboElegir, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(entCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(entNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(entPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -115,6 +131,10 @@ public class VentanaServicios extends javax.swing.JFrame {
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createSequentialGroup()
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblElegir)
+                    .addComponent(cboElegir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
 
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -194,6 +214,10 @@ public class VentanaServicios extends javax.swing.JFrame {
         registrar();
     }//GEN-LAST:event_btnRegistrarActionPerformed
 
+    private void cboElegirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboElegirActionPerformed
+        cargarSeleccion();
+    }//GEN-LAST:event_cboElegirActionPerformed
+
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
         modificar();
     }//GEN-LAST:event_btnModificarActionPerformed
@@ -204,9 +228,12 @@ public class VentanaServicios extends javax.swing.JFrame {
 
     private void btnMostrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMostrarActionPerformed
         mostrar();
+        cargarLista();
     }//GEN-LAST:event_btnMostrarActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel lblElegir;
+    private javax.swing.JComboBox<String> cboElegir;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JTextField entCodigo;
     private javax.swing.JLabel jLabel2;
@@ -246,12 +273,22 @@ public class VentanaServicios extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Codigo repetido", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
+        if (!entradas.esDecimal(entPrecio.getText()) || !entradas.esEntero(entStock.getText())) {
+            JOptionPane.showMessageDialog(this, "El precio y el stock deben ser numeros", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
         double precio = Double.parseDouble(entPrecio.getText());
         int stock = Integer.parseInt(entStock.getText());
+        String mensaje = gestion.validar(precio, stock);
+        if (!mensaje.equals("")) {
+            JOptionPane.showMessageDialog(this, mensaje, "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
         Servicio obj = new Servicio(entCodigo.getText(), entNombre.getText(), precio, stock);
         gestion.registrar(obj);
         JOptionPane.showMessageDialog(this, "Servicio registrado", "Info", JOptionPane.INFORMATION_MESSAGE);
         limpiar();
+        cargarLista();
         mostrar();
     }
 
@@ -266,13 +303,24 @@ public class VentanaServicios extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Complete los datos", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
+        if (!entradas.esDecimal(entPrecio.getText()) || !entradas.esEntero(entStock.getText())) {
+            JOptionPane.showMessageDialog(this, "El precio y el stock deben ser numeros", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
         double precio = Double.parseDouble(entPrecio.getText());
         int stock = Integer.parseInt(entStock.getText());
+        String mensaje = gestion.validar(precio, stock);
+        if (!mensaje.equals("")) {
+            JOptionPane.showMessageDialog(this, mensaje, "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
         Servicio obj = gestion.getServicios()[pos];
         obj.setNombre(entNombre.getText());
         obj.setPrecio(precio);
         obj.setStock(stock);
         JOptionPane.showMessageDialog(this, "Servicio modificado", "Info", JOptionPane.INFORMATION_MESSAGE);
+        limpiar();
+        cargarLista();
         mostrar();
     }
 
@@ -286,6 +334,7 @@ public class VentanaServicios extends javax.swing.JFrame {
         gestion.eliminar(pos);
         JOptionPane.showMessageDialog(this, "Servicio eliminado", "Info", JOptionPane.INFORMATION_MESSAGE);
         limpiar();
+        cargarLista();
         mostrar();
     }
 
@@ -299,10 +348,43 @@ public class VentanaServicios extends javax.swing.JFrame {
         }
     }
 
-    public void limpiar() {
+    public void vaciarCampos() {
         entCodigo.setText(null);
         entNombre.setText(null);
         entPrecio.setText(null);
         entStock.setText(null);
+    }
+
+    public void limpiar() {
+        vaciarCampos();
+        cboElegir.setSelectedIndex(0);
+    }
+
+    public void cargarLista() {
+        cboElegir.removeAllItems();
+        cboElegir.addItem("Seleccione para editar...");
+        for (int i = 0; i < tienda.getServicios().getCont(); i++) {
+            Servicio obj = tienda.getServicios().getServicios()[i];
+            cboElegir.addItem(String.format("%s - %s", obj.getCodigo(), obj.getNombre()));
+        }
+    }
+
+    public void cargarSeleccion() {
+        if (cboElegir.getSelectedIndex() == -1) {
+            return;
+        }
+        if (cboElegir.getSelectedIndex() == 0) {
+            vaciarCampos();
+            return;
+        }
+        int pos = tienda.getServicios().buscarPorCodigo(entradas.codigoDe(entradas.elegido(cboElegir)));
+        if (pos == -1) {
+            return;
+        }
+        Servicio obj = tienda.getServicios().getServicios()[pos];
+        entCodigo.setText(obj.getCodigo());
+        entNombre.setText(obj.getNombre());
+        entPrecio.setText(String.valueOf(obj.getPrecio()));
+        entStock.setText(String.valueOf(obj.getStock()));
     }
 }

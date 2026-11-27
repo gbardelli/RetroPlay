@@ -5,19 +5,30 @@ import javax.swing.JOptionPane;
 public class VentanaClientes extends javax.swing.JFrame {
 
     private Tienda tienda;
+    private Entradas entradas = new Entradas();
     private javax.swing.table.DefaultTableModel modelo;
 
     public VentanaClientes(Tienda tienda) {
         this.tienda = tienda;
         initComponents();
         modelo = (javax.swing.table.DefaultTableModel) Datos.getModel();
+        cargarLista();
         mostrar();
+        retroplaymanager.apariencia.Apariencia.vestir(this);
     }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
         jPanel1 = new javax.swing.JPanel();
+        lblElegir = new javax.swing.JLabel();
+        cboElegir = new javax.swing.JComboBox<>();
+        cboElegir.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione para editar..." }));
+        cboElegir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cboElegirActionPerformed(evt);
+            }
+        });
         jLabel1 = new javax.swing.JLabel();
         entDni = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
@@ -38,6 +49,9 @@ public class VentanaClientes extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Clientes");
+
+        lblElegir.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lblElegir.setText("Editar existente");
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel1.setText("DNI");
@@ -93,6 +107,7 @@ public class VentanaClientes extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(lblElegir)
                         .addComponent(jLabel1)
                         .addComponent(jLabel2)
                         .addComponent(jLabel3)
@@ -101,6 +116,7 @@ public class VentanaClientes extends javax.swing.JFrame {
                 )
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(cboElegir, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(entDni, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(entNombres, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(entApellidos, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -122,6 +138,10 @@ public class VentanaClientes extends javax.swing.JFrame {
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createSequentialGroup()
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblElegir)
+                    .addComponent(cboElegir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
 
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -205,6 +225,10 @@ public class VentanaClientes extends javax.swing.JFrame {
         registrar();
     }//GEN-LAST:event_btnRegistrarActionPerformed
 
+    private void cboElegirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboElegirActionPerformed
+        cargarSeleccion();
+    }//GEN-LAST:event_cboElegirActionPerformed
+
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
         modificar();
     }//GEN-LAST:event_btnModificarActionPerformed
@@ -215,9 +239,12 @@ public class VentanaClientes extends javax.swing.JFrame {
 
     private void btnMostrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMostrarActionPerformed
         mostrar();
+        cargarLista();
     }//GEN-LAST:event_btnMostrarActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel lblElegir;
+    private javax.swing.JComboBox<String> cboElegir;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JTextField entDni;
     private javax.swing.JLabel jLabel2;
@@ -258,6 +285,11 @@ public class VentanaClientes extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Complete los datos", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
+        String mensaje = gestion.validar(entDni.getText(), entNombres.getText(), entApellidos.getText(), entTelefono.getText(), entCorreo.getText());
+        if (!mensaje.equals("")) {
+            JOptionPane.showMessageDialog(this, mensaje, "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
         if (gestion.buscarPorDni(entDni.getText()) != -1) {
             JOptionPane.showMessageDialog(this, "DNI repetido", "Error", JOptionPane.ERROR_MESSAGE);
             return;
@@ -266,6 +298,7 @@ public class VentanaClientes extends javax.swing.JFrame {
         gestion.registrar(obj);
         JOptionPane.showMessageDialog(this, "Cliente registrado", "Info", JOptionPane.INFORMATION_MESSAGE);
         limpiar();
+        cargarLista();
         mostrar();
     }
 
@@ -280,12 +313,19 @@ public class VentanaClientes extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Complete los datos", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
+        String mensaje = gestion.validar(entDni.getText(), entNombres.getText(), entApellidos.getText(), entTelefono.getText(), entCorreo.getText());
+        if (!mensaje.equals("")) {
+            JOptionPane.showMessageDialog(this, mensaje, "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
         Cliente obj = gestion.getClientes()[pos];
         obj.setNombres(entNombres.getText());
         obj.setApellidos(entApellidos.getText());
         obj.setTelefono(entTelefono.getText());
         obj.setCorreo(entCorreo.getText());
         JOptionPane.showMessageDialog(this, "Cliente modificado", "Info", JOptionPane.INFORMATION_MESSAGE);
+        limpiar();
+        cargarLista();
         mostrar();
     }
 
@@ -299,6 +339,7 @@ public class VentanaClientes extends javax.swing.JFrame {
         gestion.eliminar(pos);
         JOptionPane.showMessageDialog(this, "Cliente eliminado", "Info", JOptionPane.INFORMATION_MESSAGE);
         limpiar();
+        cargarLista();
         mostrar();
     }
 
@@ -311,11 +352,45 @@ public class VentanaClientes extends javax.swing.JFrame {
         }
     }
 
-    public void limpiar() {
+    public void vaciarCampos() {
         entDni.setText(null);
         entNombres.setText(null);
         entApellidos.setText(null);
         entTelefono.setText(null);
         entCorreo.setText(null);
+    }
+
+    public void limpiar() {
+        vaciarCampos();
+        cboElegir.setSelectedIndex(0);
+    }
+
+    public void cargarLista() {
+        cboElegir.removeAllItems();
+        cboElegir.addItem("Seleccione para editar...");
+        for (int i = 0; i < tienda.getClientes().getCont(); i++) {
+            Cliente obj = tienda.getClientes().getClientes()[i];
+            cboElegir.addItem(String.format("%s - %s %s", obj.getDni(), obj.getNombres(), obj.getApellidos()));
+        }
+    }
+
+    public void cargarSeleccion() {
+        if (cboElegir.getSelectedIndex() == -1) {
+            return;
+        }
+        if (cboElegir.getSelectedIndex() == 0) {
+            vaciarCampos();
+            return;
+        }
+        int pos = tienda.getClientes().buscarPorDni(entradas.codigoDe(entradas.elegido(cboElegir)));
+        if (pos == -1) {
+            return;
+        }
+        Cliente obj = tienda.getClientes().getClientes()[pos];
+        entDni.setText(obj.getDni());
+        entNombres.setText(obj.getNombres());
+        entApellidos.setText(obj.getApellidos());
+        entTelefono.setText(obj.getTelefono());
+        entCorreo.setText(obj.getCorreo());
     }
 }

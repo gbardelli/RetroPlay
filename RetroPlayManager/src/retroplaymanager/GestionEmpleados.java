@@ -2,12 +2,47 @@ package retroplaymanager;
 
 public class GestionEmpleados {
 
+    private Reglas reglas = new Reglas();
     private Empleado[] empleados;
     private int cont;
+    private String[] roles;
 
     public GestionEmpleados() {
         empleados = new Empleado[30];
         cont = 0;
+        roles = new String[]{"Administrador", "Vendedor", "Almacenero"};
+    }
+
+    public boolean rolValido(String rol) {
+        for (int i = 0; i < roles.length; i++) {
+            if (roles[i].equals(rol)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public String validar(String dni, String nombres, String apellidos, String usuario, String clave) {
+        if (!reglas.soloDigitos(dni, 8)) {
+            return "El DNI debe tener 8 digitos";
+        }
+        if (!reglas.soloLetras(nombres)) {
+            return "Los nombres solo pueden tener letras";
+        }
+        if (!reglas.soloLetras(apellidos)) {
+            return "Los apellidos solo pueden tener letras";
+        }
+        if (usuario.length() < 3) {
+            return "El usuario debe tener al menos 3 caracteres";
+        }
+        if (clave.length() < 4) {
+            return "La clave debe tener al menos 4 caracteres";
+        }
+        return "";
+    }
+
+    public String[] getRoles() {
+        return roles;
     }
 
     public boolean registrar(Empleado obj) {
@@ -66,6 +101,7 @@ public class GestionEmpleados {
             empleados[i] = empleados[i + 1];
         }
         cont--;
+        empleados[cont] = null;
     }
 
     public Empleado ingresar(String usuario, String contrasena) {

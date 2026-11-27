@@ -5,6 +5,7 @@ import javax.swing.JOptionPane;
 public class VentanaNuevaOrden extends javax.swing.JFrame {
 
     private Tienda tienda;
+    private Entradas entradas = new Entradas();
     private Orden orden;
     private javax.swing.table.DefaultTableModel modelo;
 
@@ -13,7 +14,37 @@ public class VentanaNuevaOrden extends javax.swing.JFrame {
         orden = null;
         initComponents();
         modelo = (javax.swing.table.DefaultTableModel) Datos.getModel();
+        entradas.llenarDia(cboDiaR);
+        entradas.llenarMes(cboMesR);
+        entradas.llenarAnio(cboAnioR);
+        entradas.llenarDia(cboDiaE);
+        entradas.llenarMes(cboMesE);
+        entradas.llenarAnio(cboAnioE);
+        entradas.llenarHora(cboHoraE);
+        for (int i = 0; i < tienda.getClientes().getCont(); i++) {
+            Cliente obj = tienda.getClientes().getClientes()[i];
+            cboCliente.addItem(String.format("%s - %s %s", obj.getDni(), obj.getNombres(), obj.getApellidos()));
+        }
+        for (int i = 0; i < tienda.getOrdenes().getTipos().length; i++) {
+            cboTipo.addItem(tienda.getOrdenes().getTipos()[i]);
+        }
+        for (int i = 0; i < tienda.getOrdenes().getEntregas().length; i++) {
+            cboEntrega.addItem(tienda.getOrdenes().getEntregas()[i]);
+        }
+        for (int i = 0; i < tienda.getJuguetes().getCont(); i++) {
+            Juguete obj = tienda.getJuguetes().getJuguetes()[i];
+            cboArticulo.addItem(String.format("[Juguete] %s - %s", obj.getCodigo(), obj.getNombre()));
+        }
+        for (int i = 0; i < tienda.getServicios().getCont(); i++) {
+            Servicio obj = tienda.getServicios().getServicios()[i];
+            cboArticulo.addItem(String.format("[Servicio] %s - %s", obj.getCodigo(), obj.getNombre()));
+        }
+        for (int i = 0; i < tienda.getPaquetes().getCont(); i++) {
+            Paquete obj = tienda.getPaquetes().getPaquetes()[i];
+            cboArticulo.addItem(String.format("[Paquete] %s", obj.getNombre()));
+        }
         mostrar();
+        retroplaymanager.apariencia.Apariencia.vestir(this);
     }
 
     @SuppressWarnings("unchecked")
@@ -22,25 +53,36 @@ public class VentanaNuevaOrden extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        entDni = new javax.swing.JTextField();
+        cboCliente = new javax.swing.JComboBox<>();
+        cboCliente.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione un cliente..." }));
         jLabel2 = new javax.swing.JLabel();
-        entTipo = new javax.swing.JTextField();
+        cboTipo = new javax.swing.JComboBox<>();
+        cboTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione..." }));
         jLabel3 = new javax.swing.JLabel();
-        entEntrega = new javax.swing.JTextField();
+        cboEntrega = new javax.swing.JComboBox<>();
+        cboEntrega.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione..." }));
         jLabel4 = new javax.swing.JLabel();
-        entDiaR = new javax.swing.JTextField();
-        entMesR = new javax.swing.JTextField();
-        entAnioR = new javax.swing.JTextField();
+        cboDiaR = new javax.swing.JComboBox<>();
+        cboDiaR.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Dia" }));
+        cboMesR = new javax.swing.JComboBox<>();
+        cboMesR.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Mes" }));
+        cboAnioR = new javax.swing.JComboBox<>();
+        cboAnioR.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Anio" }));
         jLabel5 = new javax.swing.JLabel();
-        entDiaE = new javax.swing.JTextField();
-        entMesE = new javax.swing.JTextField();
-        entAnioE = new javax.swing.JTextField();
+        cboDiaE = new javax.swing.JComboBox<>();
+        cboDiaE.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Dia" }));
+        cboMesE = new javax.swing.JComboBox<>();
+        cboMesE.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Mes" }));
+        cboAnioE = new javax.swing.JComboBox<>();
+        cboAnioE.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Anio" }));
         jLabel6 = new javax.swing.JLabel();
-        entHoraE = new javax.swing.JTextField();
+        cboHoraE = new javax.swing.JComboBox<>();
+        cboHoraE.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Hora" }));
         btnNueva = new javax.swing.JButton();
         lblOrden = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        entCodigo = new javax.swing.JTextField();
+        cboArticulo = new javax.swing.JComboBox<>();
+        cboArticulo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione un articulo..." }));
         jLabel8 = new javax.swing.JLabel();
         entCantidad = new javax.swing.JTextField();
         btnJuguete = new javax.swing.JButton();
@@ -58,22 +100,22 @@ public class VentanaNuevaOrden extends javax.swing.JFrame {
         setTitle("Nueva orden");
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel1.setText("DNI cliente");
+        jLabel1.setText("Cliente");
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel2.setText("Tipo (Venta / Apartado)");
+        jLabel2.setText("Tipo de orden");
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel3.setText("Entrega (Tienda / Delivery)");
+        jLabel3.setText("Entrega");
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel4.setText("Fecha registro (d m a)");
+        jLabel4.setText("Fecha de registro");
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel5.setText("Fecha entrega (d m a)");
+        jLabel5.setText("Fecha de entrega");
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel6.setText("Hora entrega (0 - 23)");
+        jLabel6.setText("Hora de entrega");
 
         btnNueva.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
         btnNueva.setText("Nueva orden");
@@ -87,7 +129,7 @@ public class VentanaNuevaOrden extends javax.swing.JFrame {
         lblOrden.setText("No hay una orden en armado");
 
         jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel7.setText("Codigo o paquete");
+        jLabel7.setText("Articulo");
 
         jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel8.setText("Cantidad");
@@ -157,23 +199,23 @@ public class VentanaNuevaOrden extends javax.swing.JFrame {
                     .addComponent(jLabel8))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(entDni, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(entTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(entEntrega, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cboCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cboTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cboEntrega, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(entDiaR, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(cboDiaR, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(6, 6, 6)
-                        .addComponent(entMesR, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(cboMesR, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(6, 6, 6)
-                        .addComponent(entAnioR, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(cboAnioR, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(entDiaE, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(cboDiaE, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(6, 6, 6)
-                        .addComponent(entMesE, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(cboMesE, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(6, 6, 6)
-                        .addComponent(entAnioE, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(entHoraE, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(entCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(cboAnioE, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cboHoraE, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cboArticulo, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(entCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18))
             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -203,31 +245,31 @@ public class VentanaNuevaOrden extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(entDni, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cboCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(12, 12, 12)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(entTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cboTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(12, 12, 12)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(entEntrega, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cboEntrega, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(12, 12, 12)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(entDiaR, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(entMesR, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(entAnioR, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cboDiaR, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cboMesR, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cboAnioR, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(12, 12, 12)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(entDiaE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(entMesE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(entAnioE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cboDiaE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cboMesE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cboAnioE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(12, 12, 12)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(entHoraE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cboHoraE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(btnNueva)
                 .addGap(12, 12, 12)
@@ -235,7 +277,7 @@ public class VentanaNuevaOrden extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
-                    .addComponent(entCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cboArticulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(12, 12, 12)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
@@ -334,7 +376,7 @@ public class VentanaNuevaOrden extends javax.swing.JFrame {
     private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
         VentanaOrden obj = new VentanaOrden(tienda);
         obj.setVisible(true);
-        this.setVisible(false);
+        this.dispose();
     }//GEN-LAST:event_btnVolverActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -346,18 +388,18 @@ public class VentanaNuevaOrden extends javax.swing.JFrame {
     private javax.swing.JButton btnRegistrar;
     private javax.swing.JButton btnServicio;
     private javax.swing.JButton btnVolver;
-    private javax.swing.JTextField entAnioE;
-    private javax.swing.JTextField entAnioR;
+    private javax.swing.JComboBox<String> cboAnioE;
+    private javax.swing.JComboBox<String> cboAnioR;
     private javax.swing.JTextField entCantidad;
-    private javax.swing.JTextField entCodigo;
-    private javax.swing.JTextField entDiaE;
-    private javax.swing.JTextField entDiaR;
-    private javax.swing.JTextField entDni;
-    private javax.swing.JTextField entEntrega;
-    private javax.swing.JTextField entHoraE;
-    private javax.swing.JTextField entMesE;
-    private javax.swing.JTextField entMesR;
-    private javax.swing.JTextField entTipo;
+    private javax.swing.JComboBox<String> cboArticulo;
+    private javax.swing.JComboBox<String> cboDiaE;
+    private javax.swing.JComboBox<String> cboDiaR;
+    private javax.swing.JComboBox<String> cboCliente;
+    private javax.swing.JComboBox<String> cboEntrega;
+    private javax.swing.JComboBox<String> cboHoraE;
+    private javax.swing.JComboBox<String> cboMesE;
+    private javax.swing.JComboBox<String> cboMesR;
+    private javax.swing.JComboBox<String> cboTipo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -374,13 +416,13 @@ public class VentanaNuevaOrden extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     public boolean vacio() {
-        if (entDni.getText().equals("") || entTipo.getText().equals("") || entEntrega.getText().equals("")) {
+        if (entradas.codigoDe(entradas.elegido(cboCliente)).equals("") || entradas.elegido(cboTipo).equals("") || entradas.elegido(cboEntrega).equals("")) {
             return true;
         }
-        if (entDiaR.getText().equals("") || entMesR.getText().equals("") || entAnioR.getText().equals("")) {
+        if (entradas.elegido(cboDiaR).equals("") || entradas.elegido(cboMesR).equals("") || entradas.elegido(cboAnioR).equals("")) {
             return true;
         }
-        if (entDiaE.getText().equals("") || entMesE.getText().equals("") || entAnioE.getText().equals("") || entHoraE.getText().equals("")) {
+        if (entradas.elegido(cboDiaE).equals("") || entradas.elegido(cboMesE).equals("") || entradas.elegido(cboAnioE).equals("") || entradas.elegido(cboHoraE).equals("")) {
             return true;
         }
         return false;
@@ -391,27 +433,27 @@ public class VentanaNuevaOrden extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Complete los datos de la orden", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        int pos = tienda.getClientes().buscarPorDni(entDni.getText());
+        int pos = tienda.getClientes().buscarPorDni(entradas.codigoDe(entradas.elegido(cboCliente)));
         if (pos == -1) {
-            JOptionPane.showMessageDialog(this, String.format("El cliente con DNI %s no esta registrado", entDni.getText()), "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, String.format("El cliente con DNI %s no esta registrado", entradas.codigoDe(entradas.elegido(cboCliente))), "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        String entrega = entEntrega.getText();
-        if (!entrega.equals("Tienda") && !entrega.equals("Delivery")) {
+        String entrega = entradas.elegido(cboEntrega);
+        if (!tienda.getOrdenes().entregaValida(entrega)) {
             JOptionPane.showMessageDialog(this, "La entrega debe ser Tienda o Delivery", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        int diaR = Integer.parseInt(entDiaR.getText());
-        int mesR = Integer.parseInt(entMesR.getText());
-        int anioR = Integer.parseInt(entAnioR.getText());
-        int diaE = Integer.parseInt(entDiaE.getText());
-        int mesE = Integer.parseInt(entMesE.getText());
-        int anioE = Integer.parseInt(entAnioE.getText());
-        int horaE = Integer.parseInt(entHoraE.getText());
+        int diaR = Integer.parseInt(entradas.elegido(cboDiaR));
+        int mesR = Integer.parseInt(entradas.elegido(cboMesR));
+        int anioR = Integer.parseInt(entradas.elegido(cboAnioR));
+        int diaE = Integer.parseInt(entradas.elegido(cboDiaE));
+        int mesE = Integer.parseInt(entradas.elegido(cboMesE));
+        int anioE = Integer.parseInt(entradas.elegido(cboAnioE));
+        int horaE = Integer.parseInt(entradas.elegido(cboHoraE));
         Fecha registro = new Fecha(diaR, mesR, anioR, 0);
         Fecha entregaProgramada = new Fecha(diaE, mesE, anioE, horaE);
         Cliente cliente = tienda.getClientes().getClientes()[pos];
-        Orden nueva = tienda.getOrdenes().crear(entTipo.getText(), cliente, tienda.getSesion(), entrega, registro, entregaProgramada);
+        Orden nueva = tienda.getOrdenes().crear(entradas.elegido(cboTipo), cliente, tienda.getSesion(), entrega, registro, entregaProgramada);
         if (nueva == null) {
             JOptionPane.showMessageDialog(this, "El tipo de orden debe ser Venta o Apartado", "Error", JOptionPane.ERROR_MESSAGE);
             return;
@@ -432,27 +474,35 @@ public class VentanaNuevaOrden extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Primero cree una nueva orden", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        if (entCodigo.getText().equals("") || entCantidad.getText().equals("")) {
-            JOptionPane.showMessageDialog(this, "Ingrese el codigo y la cantidad", "Error", JOptionPane.ERROR_MESSAGE);
+        if (entradas.elegido(cboArticulo).equals("") || entCantidad.getText().equals("")) {
+            JOptionPane.showMessageDialog(this, "Elija el articulo de la lista e ingrese la cantidad", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        if (!tipoArticulo().equals(tipo)) {
+            JOptionPane.showMessageDialog(this, String.format("El articulo elegido es de tipo %s: use el boton Agregar %s", tipoArticulo(), tipoArticulo().toLowerCase()), "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        if (!entradas.esEntero(entCantidad.getText())) {
+            JOptionPane.showMessageDialog(this, "La cantidad debe ser un numero entero", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
         int cantidad = Integer.parseInt(entCantidad.getText());
         GestionOrdenes gestion = tienda.getOrdenes();
         String mensaje = "";
         if (tipo.equals("Juguete")) {
-            mensaje = gestion.agregarJuguete(orden, entCodigo.getText(), cantidad, tienda);
+            mensaje = gestion.agregarJuguete(orden, codigoArticulo(), cantidad, tienda);
         }
         if (tipo.equals("Servicio")) {
-            mensaje = gestion.agregarServicio(orden, entCodigo.getText(), cantidad, tienda);
+            mensaje = gestion.agregarServicio(orden, codigoArticulo(), cantidad, tienda);
         }
         if (tipo.equals("Paquete")) {
-            mensaje = gestion.agregarPaquete(orden, entCodigo.getText(), cantidad, tienda);
+            mensaje = gestion.agregarPaquete(orden, codigoArticulo(), cantidad, tienda);
         }
         if (!mensaje.equals("")) {
             JOptionPane.showMessageDialog(this, mensaje, "Rechazado", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        entCodigo.setText(null);
+        cboArticulo.setSelectedIndex(0);
         entCantidad.setText(null);
         mostrar();
     }
@@ -462,7 +512,11 @@ public class VentanaNuevaOrden extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Primero cree una nueva orden", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        String codigo = entCodigo.getText();
+        String codigo = codigoArticulo();
+        if (codigo.equals("")) {
+            JOptionPane.showMessageDialog(this, "Elija en la lista el articulo que quiere quitar", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
         int pos = orden.buscarDetalle("Juguete", codigo);
         if (pos == -1) {
             pos = orden.buscarDetalle("Servicio", codigo);
@@ -475,7 +529,7 @@ public class VentanaNuevaOrden extends javax.swing.JFrame {
             return;
         }
         orden.quitarDetalle(pos);
-        entCodigo.setText(null);
+        cboArticulo.setSelectedIndex(0);
         mostrar();
     }
 
@@ -519,17 +573,37 @@ public class VentanaNuevaOrden extends javax.swing.JFrame {
     }
 
     public void limpiar() {
-        entDni.setText(null);
-        entTipo.setText(null);
-        entEntrega.setText(null);
-        entDiaR.setText(null);
-        entMesR.setText(null);
-        entAnioR.setText(null);
-        entDiaE.setText(null);
-        entMesE.setText(null);
-        entAnioE.setText(null);
-        entHoraE.setText(null);
-        entCodigo.setText(null);
+        cboCliente.setSelectedIndex(0);
+        cboTipo.setSelectedIndex(0);
+        cboEntrega.setSelectedIndex(0);
+        cboDiaR.setSelectedIndex(0);
+        cboMesR.setSelectedIndex(0);
+        cboAnioR.setSelectedIndex(0);
+        cboDiaE.setSelectedIndex(0);
+        cboMesE.setSelectedIndex(0);
+        cboAnioE.setSelectedIndex(0);
+        cboHoraE.setSelectedIndex(0);
+        cboArticulo.setSelectedIndex(0);
         entCantidad.setText(null);
+    }
+
+    public String tipoArticulo() {
+        String texto = entradas.elegido(cboArticulo);
+        if (texto.equals("")) {
+            return "";
+        }
+        return texto.substring(1, texto.indexOf("]"));
+    }
+
+    public String codigoArticulo() {
+        String texto = entradas.elegido(cboArticulo);
+        if (texto.equals("")) {
+            return "";
+        }
+        String resto = texto.substring(texto.indexOf("] ") + 2);
+        if (tipoArticulo().equals("Paquete")) {
+            return resto;
+        }
+        return entradas.codigoDe(resto);
     }
 }

@@ -5,6 +5,7 @@ import javax.swing.JOptionPane;
 public class VentanaComprobante extends javax.swing.JFrame {
 
     private Tienda tienda;
+    private Entradas entradas = new Entradas();
     private javax.swing.table.DefaultTableModel modelo;
 
     public VentanaComprobante(Tienda tienda) {
@@ -12,9 +13,11 @@ public class VentanaComprobante extends javax.swing.JFrame {
         initComponents();
         modelo = (javax.swing.table.DefaultTableModel) Datos.getModel();
         actualizarTipo();
+        cargarOrdenes();
         if (autorizado()) {
             mostrar();
         }
+        retroplaymanager.apariencia.Apariencia.vestir(this);
     }
 
     @SuppressWarnings("unchecked")
@@ -25,7 +28,8 @@ public class VentanaComprobante extends javax.swing.JFrame {
         pnlTabla = new javax.swing.JPanel();
         pnlDetalle = new javax.swing.JPanel();
         lblNumOrden = new javax.swing.JLabel();
-        entNumero = new javax.swing.JTextField();
+        cboOrden = new javax.swing.JComboBox<>();
+        cboOrden.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione una orden finalizada..." }));
         lblTipo = new javax.swing.JLabel();
         cboTipo = new javax.swing.JComboBox();
         lblRuc = new javax.swing.JLabel();
@@ -44,7 +48,7 @@ public class VentanaComprobante extends javax.swing.JFrame {
         setTitle("Comprobantes");
 
         lblNumOrden.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        lblNumOrden.setText("Nro. de orden");
+        lblNumOrden.setText("Orden");
 
         lblTipo.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lblTipo.setText("Tipo");
@@ -114,7 +118,7 @@ public class VentanaComprobante extends javax.swing.JFrame {
                     .addComponent(lblRazon))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnlDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(entNumero, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cboOrden, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cboTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(entRuc, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(entRazon, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -134,7 +138,7 @@ public class VentanaComprobante extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(pnlDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblNumOrden)
-                    .addComponent(entNumero))
+                    .addComponent(cboOrden))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnlDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblTipo)
@@ -216,6 +220,7 @@ public class VentanaComprobante extends javax.swing.JFrame {
     }//GEN-LAST:event_cboTipoActionPerformed
 
     private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
+        cargarOrdenes();
         mostrar();
     }//GEN-LAST:event_btnActualizarActionPerformed
 
@@ -232,7 +237,7 @@ public class VentanaComprobante extends javax.swing.JFrame {
     private javax.swing.JPanel pnlTabla;
     private javax.swing.JPanel pnlDetalle;
     private javax.swing.JLabel lblNumOrden;
-    private javax.swing.JTextField entNumero;
+    private javax.swing.JComboBox<String> cboOrden;
     private javax.swing.JLabel lblTipo;
     private javax.swing.JComboBox<String> cboTipo;
     private javax.swing.JLabel lblRuc;
@@ -284,11 +289,11 @@ public class VentanaComprobante extends javax.swing.JFrame {
     }
 
     public Orden buscarOrden() {
-        if (entNumero.getText().equals("")) {
-            JOptionPane.showMessageDialog(this, "Ingrese el numero de orden", "Error", JOptionPane.ERROR_MESSAGE);
+        if (entradas.codigoDe(entradas.elegido(cboOrden)).equals("")) {
+            JOptionPane.showMessageDialog(this, "Elija una orden de la lista", "Error", JOptionPane.ERROR_MESSAGE);
             return null;
         }
-        int pos = tienda.getOrdenes().buscarPorNumero(Integer.parseInt(entNumero.getText()));
+        int pos = tienda.getOrdenes().buscarPorNumero(Integer.parseInt(entradas.codigoDe(entradas.elegido(cboOrden))));
         if (pos == -1) {
             JOptionPane.showMessageDialog(this, "Orden no encontrada", "Error", JOptionPane.ERROR_MESSAGE);
             return null;
@@ -334,6 +339,26 @@ public class VentanaComprobante extends javax.swing.JFrame {
         }
         txtDetalle.setText(tienda.getComprobantes().buscarPorOrden(obj.getNumero()).mostrarDatos());
         JOptionPane.showMessageDialog(this, "Comprobante emitido", "Info", JOptionPane.INFORMATION_MESSAGE);
+        cargarOrdenes();
         mostrar();
+    }
+
+    public void cargarOrdenes() {
+        String elegida = entradas.codigoDe(entradas.elegido(cboOrden));
+        cboOrden.removeAllItems();
+        cboOrden.addItem("Seleccione una orden finalizada...");
+        GestionOrdenes gestion = tienda.getOrdenes();
+        for (int i = 0; i < gestion.getCont(); i++) {
+            Orden obj = gestion.getOrdenes()[i];
+            if (obj.getEstado().equals("Finalizada")) {
+                String estado = "Sin emitir";
+                Comprobante comp = tienda.getComprobantes().buscarPorOrden(obj.getNumero());
+                if (comp != null) {
+                    estado = String.format("%s %d", comp.getTipo(), comp.getNumero());
+                }
+                cboOrden.addItem(String.format("%d - %s %s - %s", obj.getNumero(), obj.getCliente().getNombres(), obj.getCliente().getApellidos(), estado));
+            }
+        }
+        entradas.seleccionarCodigo(cboOrden, elegida);
     }
 }

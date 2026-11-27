@@ -53,6 +53,7 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="1" attributes="0">
+                              <Component id="lblElegir" min="-2" max="-2" attributes="0"/>
                               <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                               <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
                               <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
@@ -62,12 +63,13 @@
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="cboElegir" min="-2" pref="230" max="-2" attributes="0"/>
                               <Component id="entDni" min="-2" pref="180" max="-2" attributes="0"/>
                               <Component id="entNombres" min="-2" pref="180" max="-2" attributes="0"/>
                               <Component id="entApellidos" min="-2" pref="180" max="-2" attributes="0"/>
                               <Component id="entUsuario" min="-2" pref="180" max="-2" attributes="0"/>
                               <Component id="entClave" min="-2" pref="180" max="-2" attributes="0"/>
-                              <Component id="entRol" min="-2" pref="180" max="-2" attributes="0"/>
+                              <Component id="cboRol" min="-2" pref="180" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace pref="18" max="32767" attributes="0"/>
               </Group>
@@ -87,6 +89,11 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="lblElegir" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="cboElegir" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="entDni" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -114,7 +121,7 @@
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel6" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="entRol" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="cboRol" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
 
@@ -134,6 +141,29 @@
         </DimensionLayout>
       </Layout>
       <SubComponents>
+        <Component class="javax.swing.JLabel" name="lblElegir">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="14" style="1"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Editar existente"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JComboBox" name="cboElegir">
+          <Properties>
+            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+              <StringArray count="1">
+                <StringItem index="0" value="Seleccione para editar..."/>
+              </StringArray>
+            </Property>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cboElegirActionPerformed"/>
+          </Events>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+          </AuxValues>
+        </Component>
         <Component class="javax.swing.JLabel" name="jLabel1">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -182,7 +212,7 @@
             <Property name="text" type="java.lang.String" value="Contrasena"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="entClave">
+        <Component class="javax.swing.JPasswordField" name="entClave">
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel6">
           <Properties>
@@ -192,7 +222,17 @@
             <Property name="text" type="java.lang.String" value="Rol"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="entRol">
+        <Component class="javax.swing.JComboBox" name="cboRol">
+          <Properties>
+            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+              <StringArray count="1">
+                <StringItem index="0" value="Seleccione..."/>
+              </StringArray>
+            </Property>
+          </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+          </AuxValues>
         </Component>
         <Component class="javax.swing.JButton" name="btnRegistrar">
           <Properties>

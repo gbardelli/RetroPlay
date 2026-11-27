@@ -55,7 +55,7 @@
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="entNumero" min="-2" pref="100" max="-2" attributes="0"/>
+                      <Component id="cboOrden" min="-2" pref="300" max="-2" attributes="0"/>
                       <Component id="cboTipo" min="-2" pref="120" max="-2" attributes="0"/>
                       <Component id="entRuc" min="-2" pref="150" max="-2" attributes="0"/>
                       <Component id="entRazon" min="-2" pref="220" max="-2" attributes="0"/>
@@ -79,7 +79,7 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="lblNumOrden" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="entNumero" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="cboOrden" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
@@ -113,10 +113,20 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI" size="14" style="1"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Nro. de orden"/>
+            <Property name="text" type="java.lang.String" value="Orden"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="entNumero">
+        <Component class="javax.swing.JComboBox" name="cboOrden">
+          <Properties>
+            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+              <StringArray count="1">
+                <StringItem index="0" value="Seleccione una orden finalizada..."/>
+              </StringArray>
+            </Property>
+          </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+          </AuxValues>
         </Component>
         <Component class="javax.swing.JLabel" name="lblTipo">
           <Properties>

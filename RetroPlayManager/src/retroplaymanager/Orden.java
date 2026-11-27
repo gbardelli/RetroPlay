@@ -111,7 +111,7 @@ public abstract class Orden {
     }
 
     public boolean estaActiva() {
-        if (estado.equals("Pendiente") || estado.equals("Confirmada") || estado.equals("En Preparacion")) {
+        if (estado.equals("Pendiente") || estado.equals("Confirmada") || estado.equals("En Preparación")) {
             return true;
         }
         return false;

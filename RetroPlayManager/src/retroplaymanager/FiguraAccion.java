@@ -16,6 +16,6 @@ public class FiguraAccion extends Juguete {
 
     @Override
     public String getCategoria() {
-        return "Figura de Accion";
+        return "Figura de Acción";
     }
 }

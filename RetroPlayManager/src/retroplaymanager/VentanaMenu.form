@@ -50,6 +50,7 @@
                       <Component id="btnClientes" max="32767" attributes="0"/>
                       <Component id="btnOrdenes" max="32767" attributes="0"/>
                       <Component id="btnComprobante" max="32767" attributes="0"/>
+                      <Component id="btnSesion" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
               </Group>
@@ -78,6 +79,8 @@
                   <Component id="btnOrdenes" min="-2" pref="34" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
                   <Component id="btnComprobante" min="-2" pref="34" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
+                  <Component id="btnSesion" min="-2" pref="34" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
               </Group>
           </Group>
@@ -162,6 +165,14 @@
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnComprobanteActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="btnSesion">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Cerrar sesion"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSesionActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>

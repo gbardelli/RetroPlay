@@ -53,6 +53,7 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="1" attributes="0">
+                      <Component id="lblElegir" min="-2" max="-2" attributes="0"/>
                       <Component id="lblCodigo" min="-2" max="-2" attributes="0"/>
                       <Component id="lblNombre" min="-2" max="-2" attributes="0"/>
                       <Component id="lblCategoria" min="-2" max="-2" attributes="0"/>
@@ -64,19 +65,20 @@
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="cboElegir" min="-2" pref="230" max="-2" attributes="0"/>
                       <Component id="entCodigo" min="-2" pref="150" max="-2" attributes="0"/>
                       <Component id="entNombre" min="-2" pref="150" max="-2" attributes="0"/>
-                      <Component id="entCategoria" min="-2" pref="150" max="-2" attributes="0"/>
+                      <Component id="cboCategoria" min="-2" pref="150" max="-2" attributes="0"/>
                       <Component id="entAnio" min="-2" pref="150" max="-2" attributes="0"/>
                       <Component id="entPrecio" min="-2" pref="150" max="-2" attributes="0"/>
                       <Component id="entStock" min="-2" pref="150" max="-2" attributes="0"/>
-                      <Component id="entEstado" min="-2" pref="150" max="-2" attributes="0"/>
+                      <Component id="cboEstado" min="-2" pref="150" max="-2" attributes="0"/>
                       <Group type="102" alignment="0" attributes="0">
-                          <Component id="entDia" min="-2" pref="40" max="-2" attributes="0"/>
+                          <Component id="cboDia" min="-2" pref="62" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="entMes" min="-2" pref="40" max="-2" attributes="0"/>
+                          <Component id="cboMes" min="-2" pref="62" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="entAnioF" min="-2" pref="60" max="-2" attributes="0"/>
+                          <Component id="cboAnioF" min="-2" pref="82" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace max="32767" attributes="0"/>
@@ -99,6 +101,11 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="lblElegir" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="cboElegir" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="lblCodigo" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="entCodigo" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
@@ -110,7 +117,7 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="lblCategoria" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="entCategoria" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="cboCategoria" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
@@ -130,14 +137,14 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="lblEstado" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="entEstado" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="cboEstado" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="lblFecha" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="entDia" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="entMes" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="entAnioF" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="cboDia" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="cboMes" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="cboAnioF" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
@@ -152,6 +159,29 @@
         </DimensionLayout>
       </Layout>
       <SubComponents>
+        <Component class="javax.swing.JLabel" name="lblElegir">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="14" style="1"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Editar existente"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JComboBox" name="cboElegir">
+          <Properties>
+            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+              <StringArray count="1">
+                <StringItem index="0" value="Seleccione para editar..."/>
+              </StringArray>
+            </Property>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cboElegirActionPerformed"/>
+          </Events>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+          </AuxValues>
+        </Component>
         <Component class="javax.swing.JLabel" name="lblCodigo">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -180,7 +210,17 @@
             <Property name="text" type="java.lang.String" value="Categoria"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="entCategoria">
+        <Component class="javax.swing.JComboBox" name="cboCategoria">
+          <Properties>
+            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+              <StringArray count="1">
+                <StringItem index="0" value="Seleccione..."/>
+              </StringArray>
+            </Property>
+          </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+          </AuxValues>
         </Component>
         <Component class="javax.swing.JLabel" name="lblAnio">
           <Properties>
@@ -220,7 +260,17 @@
             <Property name="text" type="java.lang.String" value="Estado"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="entEstado">
+        <Component class="javax.swing.JComboBox" name="cboEstado">
+          <Properties>
+            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+              <StringArray count="1">
+                <StringItem index="0" value="Seleccione..."/>
+              </StringArray>
+            </Property>
+          </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+          </AuxValues>
         </Component>
         <Component class="javax.swing.JLabel" name="lblFecha">
           <Properties>
@@ -230,11 +280,41 @@
             <Property name="text" type="java.lang.String" value="Fecha"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="entDia">
+        <Component class="javax.swing.JComboBox" name="cboDia">
+          <Properties>
+            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+              <StringArray count="1">
+                <StringItem index="0" value="Dia"/>
+              </StringArray>
+            </Property>
+          </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+          </AuxValues>
         </Component>
-        <Component class="javax.swing.JTextField" name="entMes">
+        <Component class="javax.swing.JComboBox" name="cboMes">
+          <Properties>
+            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+              <StringArray count="1">
+                <StringItem index="0" value="Mes"/>
+              </StringArray>
+            </Property>
+          </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+          </AuxValues>
         </Component>
-        <Component class="javax.swing.JTextField" name="entAnioF">
+        <Component class="javax.swing.JComboBox" name="cboAnioF">
+          <Properties>
+            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+              <StringArray count="1">
+                <StringItem index="0" value="Anio"/>
+              </StringArray>
+            </Property>
+          </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+          </AuxValues>
         </Component>
         <Component class="javax.swing.JButton" name="btnRegistrar">
           <Properties>

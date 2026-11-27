@@ -10,6 +10,16 @@ public class GestionServicios {
         cont = 0;
     }
 
+    public String validar(double precio, int stock) {
+        if (precio <= 0) {
+            return "El precio debe ser mayor a cero";
+        }
+        if (stock < 0) {
+            return "El stock no puede ser negativo";
+        }
+        return "";
+    }
+
     public boolean registrar(Servicio obj) {
         if (cont >= servicios.length) {
             return false;
@@ -45,6 +55,7 @@ public class GestionServicios {
             servicios[i] = servicios[i + 1];
         }
         cont--;
+        servicios[cont] = null;
     }
 
     public Servicio[] getServicios() {

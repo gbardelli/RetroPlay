@@ -9,6 +9,7 @@ public class VentanaLogin extends javax.swing.JFrame {
     public VentanaLogin(Tienda tienda) {
         this.tienda = tienda;
         initComponents();
+        retroplaymanager.apariencia.Apariencia.vestir(this);
     }
 
     @SuppressWarnings("unchecked")
@@ -124,6 +125,6 @@ public class VentanaLogin extends javax.swing.JFrame {
         tienda.setSesion(empleado);
         VentanaMenu menu = new VentanaMenu(tienda);
         menu.setVisible(true);
-        this.setVisible(false);
+        this.dispose();
     }
 }

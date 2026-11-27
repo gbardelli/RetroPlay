@@ -5,10 +5,18 @@ import javax.swing.JOptionPane;
 public class VentanaReportes extends javax.swing.JFrame {
 
     private Tienda tienda;
+    private Entradas entradas = new Entradas();
 
     public VentanaReportes(Tienda tienda) {
         this.tienda = tienda;
         initComponents();
+        entradas.llenarDia(cboDiaD);
+        entradas.llenarMes(cboMesD);
+        entradas.llenarAnio(cboAnioD);
+        entradas.llenarDia(cboDiaH);
+        entradas.llenarMes(cboMesH);
+        entradas.llenarAnio(cboAnioH);
+        retroplaymanager.apariencia.Apariencia.vestir(this);
     }
 
     @SuppressWarnings("unchecked")
@@ -20,13 +28,19 @@ public class VentanaReportes extends javax.swing.JFrame {
         lblReporte = new javax.swing.JLabel();
         cboTipo = new javax.swing.JComboBox();
         lblDesde = new javax.swing.JLabel();
-        entDiaD = new javax.swing.JTextField();
-        entMesD = new javax.swing.JTextField();
-        entAnioD = new javax.swing.JTextField();
+        cboDiaD = new javax.swing.JComboBox<>();
+        cboDiaD.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Dia" }));
+        cboMesD = new javax.swing.JComboBox<>();
+        cboMesD.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Mes" }));
+        cboAnioD = new javax.swing.JComboBox<>();
+        cboAnioD.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Anio" }));
         lblHasta = new javax.swing.JLabel();
-        entDiaH = new javax.swing.JTextField();
-        entMesH = new javax.swing.JTextField();
-        entAnioH = new javax.swing.JTextField();
+        cboDiaH = new javax.swing.JComboBox<>();
+        cboDiaH.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Dia" }));
+        cboMesH = new javax.swing.JComboBox<>();
+        cboMesH.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Mes" }));
+        cboAnioH = new javax.swing.JComboBox<>();
+        cboAnioH.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Anio" }));
         btnGenerar = new javax.swing.JButton();
         scrTabla = new javax.swing.JScrollPane();
         Datos = new javax.swing.JTable();
@@ -77,17 +91,17 @@ public class VentanaReportes extends javax.swing.JFrame {
                 .addGroup(pnlFiltrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(cboTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(pnlFiltrosLayout.createSequentialGroup()
-                        .addComponent(entDiaD, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(cboDiaD, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(entMesD, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(cboMesD, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(entAnioD, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(cboAnioD, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(pnlFiltrosLayout.createSequentialGroup()
-                        .addComponent(entDiaH, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(cboDiaH, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(entMesH, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(cboMesH, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(entAnioH, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(cboAnioH, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(pnlFiltrosLayout.createSequentialGroup()
                 .addContainerGap()
@@ -104,15 +118,15 @@ public class VentanaReportes extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnlFiltrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblDesde)
-                    .addComponent(entDiaD)
-                    .addComponent(entMesD)
-                    .addComponent(entAnioD))
+                    .addComponent(cboDiaD)
+                    .addComponent(cboMesD)
+                    .addComponent(cboAnioD))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnlFiltrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblHasta)
-                    .addComponent(entDiaH)
-                    .addComponent(entMesH)
-                    .addComponent(entAnioH))
+                    .addComponent(cboDiaH)
+                    .addComponent(cboMesH)
+                    .addComponent(cboAnioH))
                 .addGap(18, 18, 18)
                 .addGroup(pnlFiltrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnGenerar))
@@ -165,13 +179,13 @@ public class VentanaReportes extends javax.swing.JFrame {
     private javax.swing.JLabel lblReporte;
     private javax.swing.JComboBox<String> cboTipo;
     private javax.swing.JLabel lblDesde;
-    private javax.swing.JTextField entDiaD;
-    private javax.swing.JTextField entMesD;
-    private javax.swing.JTextField entAnioD;
+    private javax.swing.JComboBox<String> cboDiaD;
+    private javax.swing.JComboBox<String> cboMesD;
+    private javax.swing.JComboBox<String> cboAnioD;
     private javax.swing.JLabel lblHasta;
-    private javax.swing.JTextField entDiaH;
-    private javax.swing.JTextField entMesH;
-    private javax.swing.JTextField entAnioH;
+    private javax.swing.JComboBox<String> cboDiaH;
+    private javax.swing.JComboBox<String> cboMesH;
+    private javax.swing.JComboBox<String> cboAnioH;
     private javax.swing.JButton btnGenerar;
     private javax.swing.JScrollPane scrTabla;
     private javax.swing.JTable Datos;
@@ -200,8 +214,8 @@ public class VentanaReportes extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Acceso denegado", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        Fecha desde = leerFecha(entDiaD.getText(), entMesD.getText(), entAnioD.getText());
-        Fecha hasta = leerFecha(entDiaH.getText(), entMesH.getText(), entAnioH.getText());
+        Fecha desde = leerFecha(entradas.elegido(cboDiaD), entradas.elegido(cboMesD), entradas.elegido(cboAnioD));
+        Fecha hasta = leerFecha(entradas.elegido(cboDiaH), entradas.elegido(cboMesH), entradas.elegido(cboAnioH));
         if (desde == null || hasta == null || desde.totalDias() > hasta.totalDias()) {
             JOptionPane.showMessageDialog(this, "Ingrese un rango de fechas valido", "Error", JOptionPane.ERROR_MESSAGE);
             return;

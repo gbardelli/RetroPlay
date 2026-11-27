@@ -64,25 +64,25 @@
                   </Group>
                   <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="entDni" min="-2" pref="180" max="-2" attributes="0"/>
-                      <Component id="entTipo" min="-2" pref="180" max="-2" attributes="0"/>
-                      <Component id="entEntrega" min="-2" pref="180" max="-2" attributes="0"/>
+                      <Component id="cboCliente" min="-2" pref="260" max="-2" attributes="0"/>
+                      <Component id="cboTipo" min="-2" pref="180" max="-2" attributes="0"/>
+                      <Component id="cboEntrega" min="-2" pref="180" max="-2" attributes="0"/>
                       <Group type="102" alignment="0" attributes="0">
-                          <Component id="entDiaR" min="-2" pref="45" max="-2" attributes="0"/>
+                          <Component id="cboDiaR" min="-2" pref="62" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
-                          <Component id="entMesR" min="-2" pref="45" max="-2" attributes="0"/>
+                          <Component id="cboMesR" min="-2" pref="62" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
-                          <Component id="entAnioR" min="-2" pref="70" max="-2" attributes="0"/>
+                          <Component id="cboAnioR" min="-2" pref="82" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
-                          <Component id="entDiaE" min="-2" pref="45" max="-2" attributes="0"/>
+                          <Component id="cboDiaE" min="-2" pref="62" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
-                          <Component id="entMesE" min="-2" pref="45" max="-2" attributes="0"/>
+                          <Component id="cboMesE" min="-2" pref="62" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
-                          <Component id="entAnioE" min="-2" pref="70" max="-2" attributes="0"/>
+                          <Component id="cboAnioE" min="-2" pref="82" max="-2" attributes="0"/>
                       </Group>
-                      <Component id="entHoraE" min="-2" pref="45" max="-2" attributes="0"/>
-                      <Component id="entCodigo" min="-2" pref="180" max="-2" attributes="0"/>
+                      <Component id="cboHoraE" min="-2" pref="62" max="-2" attributes="0"/>
+                      <Component id="cboArticulo" min="-2" pref="260" max="-2" attributes="0"/>
                       <Component id="entCantidad" min="-2" pref="80" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
@@ -121,36 +121,36 @@
                   <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="entDni" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="cboCliente" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="entTipo" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="cboTipo" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="entEntrega" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="cboEntrega" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="entDiaR" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="entMesR" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="entAnioR" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="cboDiaR" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="cboMesR" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="cboAnioR" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="entDiaE" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="entMesE" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="entAnioE" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="cboDiaE" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="cboMesE" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="cboAnioE" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel6" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="entHoraE" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="cboHoraE" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                   <Component id="btnNueva" min="-2" max="-2" attributes="0"/>
@@ -159,7 +159,7 @@
                   <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel7" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="entCodigo" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="cboArticulo" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
@@ -192,68 +192,168 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI" size="14" style="1"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="DNI cliente"/>
+            <Property name="text" type="java.lang.String" value="Cliente"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="entDni">
+        <Component class="javax.swing.JComboBox" name="cboCliente">
+          <Properties>
+            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+              <StringArray count="1">
+                <StringItem index="0" value="Seleccione un cliente..."/>
+              </StringArray>
+            </Property>
+          </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+          </AuxValues>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel2">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI" size="14" style="1"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Tipo (Venta / Apartado)"/>
+            <Property name="text" type="java.lang.String" value="Tipo de orden"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="entTipo">
+        <Component class="javax.swing.JComboBox" name="cboTipo">
+          <Properties>
+            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+              <StringArray count="1">
+                <StringItem index="0" value="Seleccione..."/>
+              </StringArray>
+            </Property>
+          </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+          </AuxValues>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel3">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI" size="14" style="1"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Entrega (Tienda / Delivery)"/>
+            <Property name="text" type="java.lang.String" value="Entrega"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="entEntrega">
+        <Component class="javax.swing.JComboBox" name="cboEntrega">
+          <Properties>
+            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+              <StringArray count="1">
+                <StringItem index="0" value="Seleccione..."/>
+              </StringArray>
+            </Property>
+          </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+          </AuxValues>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel4">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI" size="14" style="1"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Fecha registro (d m a)"/>
+            <Property name="text" type="java.lang.String" value="Fecha de registro"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="entDiaR">
+        <Component class="javax.swing.JComboBox" name="cboDiaR">
+          <Properties>
+            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+              <StringArray count="1">
+                <StringItem index="0" value="Dia"/>
+              </StringArray>
+            </Property>
+          </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+          </AuxValues>
         </Component>
-        <Component class="javax.swing.JTextField" name="entMesR">
+        <Component class="javax.swing.JComboBox" name="cboMesR">
+          <Properties>
+            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+              <StringArray count="1">
+                <StringItem index="0" value="Mes"/>
+              </StringArray>
+            </Property>
+          </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+          </AuxValues>
         </Component>
-        <Component class="javax.swing.JTextField" name="entAnioR">
+        <Component class="javax.swing.JComboBox" name="cboAnioR">
+          <Properties>
+            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+              <StringArray count="1">
+                <StringItem index="0" value="Anio"/>
+              </StringArray>
+            </Property>
+          </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+          </AuxValues>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel5">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI" size="14" style="1"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Fecha entrega (d m a)"/>
+            <Property name="text" type="java.lang.String" value="Fecha de entrega"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="entDiaE">
+        <Component class="javax.swing.JComboBox" name="cboDiaE">
+          <Properties>
+            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+              <StringArray count="1">
+                <StringItem index="0" value="Dia"/>
+              </StringArray>
+            </Property>
+          </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+          </AuxValues>
         </Component>
-        <Component class="javax.swing.JTextField" name="entMesE">
+        <Component class="javax.swing.JComboBox" name="cboMesE">
+          <Properties>
+            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+              <StringArray count="1">
+                <StringItem index="0" value="Mes"/>
+              </StringArray>
+            </Property>
+          </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+          </AuxValues>
         </Component>
-        <Component class="javax.swing.JTextField" name="entAnioE">
+        <Component class="javax.swing.JComboBox" name="cboAnioE">
+          <Properties>
+            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+              <StringArray count="1">
+                <StringItem index="0" value="Anio"/>
+              </StringArray>
+            </Property>
+          </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+          </AuxValues>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel6">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI" size="14" style="1"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Hora entrega (0 - 23)"/>
+            <Property name="text" type="java.lang.String" value="Hora de entrega"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="entHoraE">
+        <Component class="javax.swing.JComboBox" name="cboHoraE">
+          <Properties>
+            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+              <StringArray count="1">
+                <StringItem index="0" value="Hora"/>
+              </StringArray>
+            </Property>
+          </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+          </AuxValues>
         </Component>
         <Component class="javax.swing.JButton" name="btnNueva">
           <Properties>
@@ -279,10 +379,20 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI" size="14" style="1"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Codigo o paquete"/>
+            <Property name="text" type="java.lang.String" value="Articulo"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="entCodigo">
+        <Component class="javax.swing.JComboBox" name="cboArticulo">
+          <Properties>
+            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+              <StringArray count="1">
+                <StringItem index="0" value="Seleccione un articulo..."/>
+              </StringArray>
+            </Property>
+          </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+          </AuxValues>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel8">
           <Properties>

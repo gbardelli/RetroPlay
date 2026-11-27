@@ -5,11 +5,32 @@ public class GestionOrdenes {
     private Orden[] ordenes;
     private int cont;
     private int correlativo;
+    private String[] tipos;
+    private String[] entregas;
 
     public GestionOrdenes() {
         ordenes = new Orden[100];
         cont = 0;
         correlativo = 0;
+        tipos = new String[]{"Venta", "Apartado"};
+        entregas = new String[]{"Tienda", "Delivery"};
+    }
+
+    public boolean entregaValida(String entrega) {
+        for (int i = 0; i < entregas.length; i++) {
+            if (entregas[i].equals(entrega)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public String[] getTipos() {
+        return tipos;
+    }
+
+    public String[] getEntregas() {
+        return entregas;
     }
 
     public Orden crear(String tipo, Cliente cliente, Empleado vendedor, String tipoEntrega, Fecha fechaRegistro, Fecha fechaEntrega) {
@@ -59,8 +80,8 @@ public class GestionOrdenes {
         if (cantidad <= 0) {
             return "La cantidad debe ser mayor que cero";
         }
-        if (obj.getEstado().equals("En Restauracion")) {
-            return String.format("El juguete %s esta En Restauracion y no puede ser vendido ni apartado", obj.getCodigo());
+        if (obj.getEstado().equals("En Restauración")) {
+            return String.format("El juguete %s esta En Restauración y no puede ser vendido ni apartado", obj.getCodigo());
         }
         if (!obj.puedeVenderse()) {
             return String.format("El juguete %s no esta disponible, su estado es %s", obj.getCodigo(), obj.getEstado());
@@ -382,7 +403,7 @@ public class GestionOrdenes {
         orden.registrarCategorias(tienda);
         moverInventario(orden, "descontar", fecha, tienda);
         orden.setAlmacenero(empleado);
-        orden.cambiarEstado("En Preparacion", fecha, empleado.getUsuario(), String.format("Producto verificado, juguetes pasan a %s", orden.estadoJuguete()));
+        orden.cambiarEstado("En Preparación", fecha, empleado.getUsuario(), String.format("Producto verificado, juguetes pasan a %s", orden.estadoJuguete()));
         return "";
     }
 
@@ -391,8 +412,8 @@ public class GestionOrdenes {
         if (!mensaje.equals("")) {
             return mensaje;
         }
-        if (!orden.getEstado().equals("En Preparacion")) {
-            return "Solo se puede entregar una orden En Preparacion";
+        if (!orden.getEstado().equals("En Preparación")) {
+            return "Solo se puede entregar una orden En Preparación";
         }
         mensaje = validarMomento(orden, fecha);
         if (!mensaje.equals("")) {
@@ -434,7 +455,7 @@ public class GestionOrdenes {
                 observacion = String.format("Cancelada con menos de 24 horas, se retiene el adelanto S/ %.2f", orden.getAdelanto());
             }
         }
-        if (orden.getEstado().equals("En Preparacion")) {
+        if (orden.getEstado().equals("En Preparación")) {
             moverInventario(orden, "devolver", fecha, tienda);
         }
         orden.setFechaCierre(fecha);

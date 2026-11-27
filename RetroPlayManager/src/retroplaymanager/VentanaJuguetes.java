@@ -5,13 +5,25 @@ import javax.swing.JOptionPane;
 public class VentanaJuguetes extends javax.swing.JFrame {
 
     private Tienda tienda;
+    private Entradas entradas = new Entradas();
     private javax.swing.table.DefaultTableModel modelo;
 
     public VentanaJuguetes(Tienda tienda) {
         this.tienda = tienda;
         initComponents();
         modelo = (javax.swing.table.DefaultTableModel) Datos.getModel();
+        for (int i = 0; i < tienda.getJuguetes().getCategorias().length; i++) {
+            cboCategoria.addItem(tienda.getJuguetes().getCategorias()[i]);
+        }
+        for (int i = 0; i < tienda.getJuguetes().getEstados().length; i++) {
+            cboEstado.addItem(tienda.getJuguetes().getEstados()[i]);
+        }
+        entradas.llenarDia(cboDia);
+        entradas.llenarMes(cboMes);
+        entradas.llenarAnio(cboAnioF);
+        cargarLista();
         mostrar();
+        retroplaymanager.apariencia.Apariencia.vestir(this);
     }
 
     @SuppressWarnings("unchecked")
@@ -19,13 +31,22 @@ public class VentanaJuguetes extends javax.swing.JFrame {
     private void initComponents() {
 
         pnlFormulario = new javax.swing.JPanel();
+        lblElegir = new javax.swing.JLabel();
+        cboElegir = new javax.swing.JComboBox<>();
+        cboElegir.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione para editar..." }));
+        cboElegir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cboElegirActionPerformed(evt);
+            }
+        });
         pnlTabla = new javax.swing.JPanel();
         lblCodigo = new javax.swing.JLabel();
         entCodigo = new javax.swing.JTextField();
         lblNombre = new javax.swing.JLabel();
         entNombre = new javax.swing.JTextField();
         lblCategoria = new javax.swing.JLabel();
-        entCategoria = new javax.swing.JTextField();
+        cboCategoria = new javax.swing.JComboBox<>();
+        cboCategoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione..." }));
         lblAnio = new javax.swing.JLabel();
         entAnio = new javax.swing.JTextField();
         lblPrecioBase = new javax.swing.JLabel();
@@ -33,11 +54,15 @@ public class VentanaJuguetes extends javax.swing.JFrame {
         lblStock = new javax.swing.JLabel();
         entStock = new javax.swing.JTextField();
         lblEstado = new javax.swing.JLabel();
-        entEstado = new javax.swing.JTextField();
+        cboEstado = new javax.swing.JComboBox<>();
+        cboEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione..." }));
         lblFecha = new javax.swing.JLabel();
-        entDia = new javax.swing.JTextField();
-        entMes = new javax.swing.JTextField();
-        entAnioF = new javax.swing.JTextField();
+        cboDia = new javax.swing.JComboBox<>();
+        cboDia.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Dia" }));
+        cboMes = new javax.swing.JComboBox<>();
+        cboMes.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Mes" }));
+        cboAnioF = new javax.swing.JComboBox<>();
+        cboAnioF.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Anio" }));
         btnRegistrar = new javax.swing.JButton();
         btnModificar = new javax.swing.JButton();
         btnEliminar = new javax.swing.JButton();
@@ -47,6 +72,9 @@ public class VentanaJuguetes extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Juguetes");
+
+        lblElegir.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lblElegir.setText("Editar existente");
 
         lblCodigo.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lblCodigo.setText("Codigo");
@@ -121,6 +149,7 @@ public class VentanaJuguetes extends javax.swing.JFrame {
             .addGroup(pnlFormularioLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(pnlFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(lblElegir)
                     .addComponent(lblCodigo)
                     .addComponent(lblNombre)
                     .addComponent(lblCategoria)
@@ -131,19 +160,20 @@ public class VentanaJuguetes extends javax.swing.JFrame {
                     .addComponent(lblFecha))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnlFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(cboElegir, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(entCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(entNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(entCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cboCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(entAnio, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(entPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(entStock, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(entEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cboEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(pnlFormularioLayout.createSequentialGroup()
-                        .addComponent(entDia, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(cboDia, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(entMes, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(cboMes, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(entAnioF, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(cboAnioF, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(pnlFormularioLayout.createSequentialGroup()
                 .addContainerGap()
@@ -161,6 +191,10 @@ public class VentanaJuguetes extends javax.swing.JFrame {
             .addGroup(pnlFormularioLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(pnlFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblElegir)
+                    .addComponent(cboElegir))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnlFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblCodigo)
                     .addComponent(entCodigo))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -170,7 +204,7 @@ public class VentanaJuguetes extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnlFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblCategoria)
-                    .addComponent(entCategoria))
+                    .addComponent(cboCategoria))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnlFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblAnio)
@@ -186,13 +220,13 @@ public class VentanaJuguetes extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnlFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblEstado)
-                    .addComponent(entEstado))
+                    .addComponent(cboEstado))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnlFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblFecha)
-                    .addComponent(entDia)
-                    .addComponent(entMes)
-                    .addComponent(entAnioF))
+                    .addComponent(cboDia)
+                    .addComponent(cboMes)
+                    .addComponent(cboAnioF))
                 .addGap(18, 18, 18)
                 .addGroup(pnlFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnRegistrar)
@@ -248,6 +282,10 @@ public class VentanaJuguetes extends javax.swing.JFrame {
         registrar();
     }//GEN-LAST:event_btnRegistrarActionPerformed
 
+    private void cboElegirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboElegirActionPerformed
+        cargarSeleccion();
+    }//GEN-LAST:event_cboElegirActionPerformed
+
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
         modificar();
     }//GEN-LAST:event_btnModificarActionPerformed
@@ -258,17 +296,20 @@ public class VentanaJuguetes extends javax.swing.JFrame {
 
     private void btnMostrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMostrarActionPerformed
         mostrar();
+        cargarLista();
     }//GEN-LAST:event_btnMostrarActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel pnlFormulario;
     private javax.swing.JPanel pnlTabla;
+    private javax.swing.JLabel lblElegir;
+    private javax.swing.JComboBox<String> cboElegir;
     private javax.swing.JLabel lblCodigo;
     private javax.swing.JTextField entCodigo;
     private javax.swing.JLabel lblNombre;
     private javax.swing.JTextField entNombre;
     private javax.swing.JLabel lblCategoria;
-    private javax.swing.JTextField entCategoria;
+    private javax.swing.JComboBox<String> cboCategoria;
     private javax.swing.JLabel lblAnio;
     private javax.swing.JTextField entAnio;
     private javax.swing.JLabel lblPrecioBase;
@@ -276,11 +317,11 @@ public class VentanaJuguetes extends javax.swing.JFrame {
     private javax.swing.JLabel lblStock;
     private javax.swing.JTextField entStock;
     private javax.swing.JLabel lblEstado;
-    private javax.swing.JTextField entEstado;
+    private javax.swing.JComboBox<String> cboEstado;
     private javax.swing.JLabel lblFecha;
-    private javax.swing.JTextField entDia;
-    private javax.swing.JTextField entMes;
-    private javax.swing.JTextField entAnioF;
+    private javax.swing.JComboBox<String> cboDia;
+    private javax.swing.JComboBox<String> cboMes;
+    private javax.swing.JComboBox<String> cboAnioF;
     private javax.swing.JButton btnRegistrar;
     private javax.swing.JButton btnModificar;
     private javax.swing.JButton btnEliminar;
@@ -289,33 +330,26 @@ public class VentanaJuguetes extends javax.swing.JFrame {
     private javax.swing.JTable Datos;
     // End of variables declaration//GEN-END:variables
 
-    public boolean estadoValido(String estado) {
-        if (estado.equals("Disponible") || estado.equals("Vendido") || estado.equals("En Restauracion") || estado.equals("Apartado")) {
-            return true;
-        }
-        return false;
-    }
-
     public boolean vacio() {
-        if (entCodigo.getText().equals("") || entNombre.getText().equals("") || entCategoria.getText().equals("")) {
+        if (entCodigo.getText().equals("") || entNombre.getText().equals("") || entradas.elegido(cboCategoria).equals("")) {
             return true;
         }
         if (entAnio.getText().equals("") || entPrecio.getText().equals("") || entStock.getText().equals("")) {
             return true;
         }
-        if (entEstado.getText().equals("")) {
+        if (entradas.elegido(cboEstado).equals("")) {
             return true;
         }
         return false;
     }
 
     public Fecha leerFecha() {
-        if (entDia.getText().equals("") || entMes.getText().equals("") || entAnioF.getText().equals("")) {
+        if (entradas.elegido(cboDia).equals("") || entradas.elegido(cboMes).equals("") || entradas.elegido(cboAnioF).equals("")) {
             return null;
         }
-        int dia = Integer.parseInt(entDia.getText());
-        int mes = Integer.parseInt(entMes.getText());
-        int anio = Integer.parseInt(entAnioF.getText());
+        int dia = Integer.parseInt(entradas.elegido(cboDia));
+        int mes = Integer.parseInt(entradas.elegido(cboMes));
+        int anio = Integer.parseInt(entradas.elegido(cboAnioF));
         Fecha fecha = new Fecha(dia, mes, anio, 0);
         if (!fecha.esValida()) {
             return null;
@@ -333,7 +367,7 @@ public class VentanaJuguetes extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Complete los datos", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        if (!estadoValido(entEstado.getText())) {
+        if (!gestion.estadoValido(entradas.elegido(cboEstado))) {
             JOptionPane.showMessageDialog(this, "Estado no permitido", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
@@ -346,10 +380,19 @@ public class VentanaJuguetes extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Ingrese una fecha valida", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
+        if (!entradas.esEntero(entAnio.getText()) || !entradas.esDecimal(entPrecio.getText()) || !entradas.esEntero(entStock.getText())) {
+            JOptionPane.showMessageDialog(this, "Anio, precio y stock deben ser numeros", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
         int anio = Integer.parseInt(entAnio.getText());
         double precio = Double.parseDouble(entPrecio.getText());
         int stock = Integer.parseInt(entStock.getText());
-        Juguete obj = gestion.crear(entCategoria.getText(), entCodigo.getText(), entNombre.getText(), anio, precio, stock, entEstado.getText(), fecha.texto());
+        String mensaje = gestion.validar(anio, precio, stock);
+        if (!mensaje.equals("")) {
+            JOptionPane.showMessageDialog(this, mensaje, "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        Juguete obj = gestion.crear(entradas.elegido(cboCategoria), entCodigo.getText(), entNombre.getText(), anio, precio, stock, entradas.elegido(cboEstado), fecha.texto());
         if (obj == null) {
             JOptionPane.showMessageDialog(this, "Categoria no permitida", "Error", JOptionPane.ERROR_MESSAGE);
             return;
@@ -360,6 +403,7 @@ public class VentanaJuguetes extends javax.swing.JFrame {
         }
         JOptionPane.showMessageDialog(this, "Juguete registrado", "Info", JOptionPane.INFORMATION_MESSAGE);
         limpiar();
+        cargarLista();
         mostrar();
     }
 
@@ -374,7 +418,7 @@ public class VentanaJuguetes extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Complete los datos", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        if (!estadoValido(entEstado.getText())) {
+        if (!gestion.estadoValido(entradas.elegido(cboEstado))) {
             JOptionPane.showMessageDialog(this, "Estado no permitido", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
@@ -383,10 +427,19 @@ public class VentanaJuguetes extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Ingrese una fecha valida", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
+        if (!entradas.esEntero(entAnio.getText()) || !entradas.esDecimal(entPrecio.getText()) || !entradas.esEntero(entStock.getText())) {
+            JOptionPane.showMessageDialog(this, "Anio, precio y stock deben ser numeros", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
         int anio = Integer.parseInt(entAnio.getText());
         double precio = Double.parseDouble(entPrecio.getText());
         int stock = Integer.parseInt(entStock.getText());
-        Juguete obj = gestion.crear(entCategoria.getText(), entCodigo.getText(), entNombre.getText(), anio, precio, stock, entEstado.getText(), fecha.texto());
+        String mensaje = gestion.validar(anio, precio, stock);
+        if (!mensaje.equals("")) {
+            JOptionPane.showMessageDialog(this, mensaje, "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        Juguete obj = gestion.crear(entradas.elegido(cboCategoria), entCodigo.getText(), entNombre.getText(), anio, precio, stock, entradas.elegido(cboEstado), fecha.texto());
         if (obj == null) {
             JOptionPane.showMessageDialog(this, "Categoria no permitida", "Error", JOptionPane.ERROR_MESSAGE);
             return;
@@ -396,6 +449,8 @@ public class VentanaJuguetes extends javax.swing.JFrame {
             return;
         }
         JOptionPane.showMessageDialog(this, "Juguete modificado", "Info", JOptionPane.INFORMATION_MESSAGE);
+        limpiar();
+        cargarLista();
         mostrar();
     }
 
@@ -417,6 +472,7 @@ public class VentanaJuguetes extends javax.swing.JFrame {
         }
         JOptionPane.showMessageDialog(this, "Juguete eliminado", "Info", JOptionPane.INFORMATION_MESSAGE);
         limpiar();
+        cargarLista();
         mostrar();
     }
 
@@ -431,16 +487,52 @@ public class VentanaJuguetes extends javax.swing.JFrame {
         }
     }
 
-    public void limpiar() {
+    public void vaciarCampos() {
         entCodigo.setText(null);
         entNombre.setText(null);
-        entCategoria.setText(null);
+        cboCategoria.setSelectedIndex(0);
         entAnio.setText(null);
         entPrecio.setText(null);
         entStock.setText(null);
-        entEstado.setText(null);
-        entDia.setText(null);
-        entMes.setText(null);
-        entAnioF.setText(null);
+        cboEstado.setSelectedIndex(0);
+        cboDia.setSelectedIndex(0);
+        cboMes.setSelectedIndex(0);
+        cboAnioF.setSelectedIndex(0);
+    }
+
+    public void limpiar() {
+        vaciarCampos();
+        cboElegir.setSelectedIndex(0);
+    }
+
+    public void cargarLista() {
+        cboElegir.removeAllItems();
+        cboElegir.addItem("Seleccione para editar...");
+        for (int i = 0; i < tienda.getJuguetes().getCont(); i++) {
+            Juguete obj = tienda.getJuguetes().getJuguetes()[i];
+            cboElegir.addItem(String.format("%s - %s", obj.getCodigo(), obj.getNombre()));
+        }
+    }
+
+    public void cargarSeleccion() {
+        if (cboElegir.getSelectedIndex() == -1) {
+            return;
+        }
+        if (cboElegir.getSelectedIndex() == 0) {
+            vaciarCampos();
+            return;
+        }
+        int pos = tienda.getJuguetes().buscarPorCodigo(entradas.codigoDe(entradas.elegido(cboElegir)));
+        if (pos == -1) {
+            return;
+        }
+        Juguete obj = tienda.getJuguetes().getJuguetes()[pos];
+        entCodigo.setText(obj.getCodigo());
+        entNombre.setText(obj.getNombre());
+        entradas.seleccionar(cboCategoria, obj.getCategoria());
+        entAnio.setText(String.valueOf(obj.getAnio()));
+        entPrecio.setText(String.valueOf(obj.getPrecioBase()));
+        entStock.setText(String.valueOf(obj.getStock()));
+        entradas.seleccionar(cboEstado, obj.getEstado());
     }
 }

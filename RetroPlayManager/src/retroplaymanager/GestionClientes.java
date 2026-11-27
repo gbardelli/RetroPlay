@@ -2,12 +2,32 @@ package retroplaymanager;
 
 public class GestionClientes {
 
+    private Reglas reglas = new Reglas();
     private Cliente[] clientes;
     private int cont;
 
     public GestionClientes() {
         clientes = new Cliente[50];
         cont = 0;
+    }
+
+    public String validar(String dni, String nombres, String apellidos, String telefono, String correo) {
+        if (!reglas.soloDigitos(dni, 8)) {
+            return "El DNI debe tener 8 digitos";
+        }
+        if (!reglas.soloLetras(nombres)) {
+            return "Los nombres solo pueden tener letras";
+        }
+        if (!reglas.soloLetras(apellidos)) {
+            return "Los apellidos solo pueden tener letras";
+        }
+        if (!reglas.soloDigitos(telefono, 9)) {
+            return "El telefono debe tener 9 digitos";
+        }
+        if (!reglas.correoValido(correo)) {
+            return "El correo no es valido";
+        }
+        return "";
     }
 
     public boolean registrar(Cliente obj) {
@@ -36,6 +56,7 @@ public class GestionClientes {
             clientes[i] = clientes[i + 1];
         }
         cont--;
+        clientes[cont] = null;
     }
 
     public void sumarCompra(String dni) {
