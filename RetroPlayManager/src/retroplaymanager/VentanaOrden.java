@@ -374,14 +374,13 @@ public class VentanaOrden extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     public Orden ordenElegida() {
-        if (entradas.codigoDe(entradas.elegido(cboOrden)).equals("")) {
+        if (cboOrden.getSelectedIndex() <= 0) {
             JOptionPane.showMessageDialog(this, "Elija una orden de la lista", "Error", JOptionPane.ERROR_MESSAGE);
             return null;
         }
-        int numero = Integer.parseInt(entradas.codigoDe(entradas.elegido(cboOrden)));
-        int pos = tienda.getOrdenes().buscarPorNumero(numero);
-        if (pos == -1) {
-            JOptionPane.showMessageDialog(this, String.format("La orden %d no existe", numero), "Error", JOptionPane.ERROR_MESSAGE);
+        int pos = cboOrden.getSelectedIndex() - 1;
+        if (pos >= tienda.getOrdenes().getCont()) {
+            JOptionPane.showMessageDialog(this, "La orden elegida no existe", "Error", JOptionPane.ERROR_MESSAGE);
             return null;
         }
         return tienda.getOrdenes().getOrdenes()[pos];
@@ -484,14 +483,16 @@ public class VentanaOrden extends javax.swing.JFrame {
     }
 
     public void cargarOrdenes() {
-        String elegida = entradas.codigoDe(entradas.elegido(cboOrden));
+        int elegida = cboOrden.getSelectedIndex();
         cboOrden.removeAllItems();
         cboOrden.addItem("Seleccione una orden...");
         for (int i = 0; i < tienda.getOrdenes().getCont(); i++) {
             Orden obj = tienda.getOrdenes().getOrdenes()[i];
             cboOrden.addItem(String.format("%d - %s %s - %s", obj.getNumero(), obj.getCliente().getNombres(), obj.getCliente().getApellidos(), obj.getEstado()));
         }
-        entradas.seleccionarCodigo(cboOrden, elegida);
+        if (elegida > 0 && elegida < cboOrden.getItemCount()) {
+            cboOrden.setSelectedIndex(elegida);
+        }
     }
 
     public void verSeleccion() {
@@ -503,7 +504,7 @@ public class VentanaOrden extends javax.swing.JFrame {
         if (cboOrden.getSelectedIndex() == 0) {
             return;
         }
-        int pos = tienda.getOrdenes().buscarPorNumero(Integer.parseInt(entradas.codigoDe(entradas.elegido(cboOrden))));
+        int pos = cboOrden.getSelectedIndex() - 1;
         if (pos != -1) {
             verDetalle(tienda.getOrdenes().getOrdenes()[pos]);
         }

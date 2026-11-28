@@ -6,6 +6,8 @@ public class VentanaComprobante extends javax.swing.JFrame {
 
     private Tienda tienda;
     private Entradas entradas = new Entradas();
+    private int[] numeros = new int[100];
+    private int contN = 0;
     private javax.swing.table.DefaultTableModel modelo;
 
     public VentanaComprobante(Tienda tienda) {
@@ -289,11 +291,11 @@ public class VentanaComprobante extends javax.swing.JFrame {
     }
 
     public Orden buscarOrden() {
-        if (entradas.codigoDe(entradas.elegido(cboOrden)).equals("")) {
+        if (cboOrden.getSelectedIndex() <= 0) {
             JOptionPane.showMessageDialog(this, "Elija una orden de la lista", "Error", JOptionPane.ERROR_MESSAGE);
             return null;
         }
-        int pos = tienda.getOrdenes().buscarPorNumero(Integer.parseInt(entradas.codigoDe(entradas.elegido(cboOrden))));
+        int pos = tienda.getOrdenes().buscarPorNumero(numeros[cboOrden.getSelectedIndex() - 1]);
         if (pos == -1) {
             JOptionPane.showMessageDialog(this, "Orden no encontrada", "Error", JOptionPane.ERROR_MESSAGE);
             return null;
@@ -344,7 +346,11 @@ public class VentanaComprobante extends javax.swing.JFrame {
     }
 
     public void cargarOrdenes() {
-        String elegida = entradas.codigoDe(entradas.elegido(cboOrden));
+        int elegida = 0;
+        if (cboOrden.getSelectedIndex() > 0) {
+            elegida = numeros[cboOrden.getSelectedIndex() - 1];
+        }
+        contN = 0;
         cboOrden.removeAllItems();
         cboOrden.addItem("Seleccione una orden finalizada...");
         GestionOrdenes gestion = tienda.getOrdenes();
@@ -357,8 +363,14 @@ public class VentanaComprobante extends javax.swing.JFrame {
                     estado = String.format("%s %d", comp.getTipo(), comp.getNumero());
                 }
                 cboOrden.addItem(String.format("%d - %s %s - %s", obj.getNumero(), obj.getCliente().getNombres(), obj.getCliente().getApellidos(), estado));
+                numeros[contN] = obj.getNumero();
+                contN++;
             }
         }
-        entradas.seleccionarCodigo(cboOrden, elegida);
+        for (int i = 0; i < contN; i++) {
+            if (numeros[i] == elegida) {
+                cboOrden.setSelectedIndex(i + 1);
+            }
+        }
     }
 }

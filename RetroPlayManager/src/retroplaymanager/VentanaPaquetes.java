@@ -327,7 +327,7 @@ public class VentanaPaquetes extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Elija un juguete de la lista", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        int pj = tienda.getJuguetes().buscarPorCodigo(entradas.codigoDe(entradas.elegido(cboJuguete)));
+        int pj = cboJuguete.getSelectedIndex() - 1;
         if (pj == -1) {
             JOptionPane.showMessageDialog(this, "Juguete no encontrado", "Error", JOptionPane.ERROR_MESSAGE);
             return;
@@ -357,7 +357,7 @@ public class VentanaPaquetes extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Elija un servicio de la lista", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        int ps = tienda.getServicios().buscarPorCodigo(entradas.codigoDe(entradas.elegido(cboServicio)));
+        int ps = cboServicio.getSelectedIndex() - 1;
         if (ps == -1) {
             JOptionPane.showMessageDialog(this, "Servicio no encontrado", "Error", JOptionPane.ERROR_MESSAGE);
             return;

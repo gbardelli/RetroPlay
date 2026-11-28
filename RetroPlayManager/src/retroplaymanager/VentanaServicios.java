@@ -377,14 +377,14 @@ public class VentanaServicios extends javax.swing.JFrame {
             vaciarCampos();
             return;
         }
-        int pos = tienda.getServicios().buscarPorCodigo(entradas.codigoDe(entradas.elegido(cboElegir)));
+        int pos = cboElegir.getSelectedIndex() - 1;
         if (pos == -1) {
             return;
         }
         Servicio obj = tienda.getServicios().getServicios()[pos];
         entCodigo.setText(obj.getCodigo());
         entNombre.setText(obj.getNombre());
-        entPrecio.setText(String.valueOf(obj.getPrecio()));
-        entStock.setText(String.valueOf(obj.getStock()));
+        entPrecio.setText(String.format("%.2f", obj.getPrecio()));
+        entStock.setText(String.format("%d", obj.getStock()));
     }
 }

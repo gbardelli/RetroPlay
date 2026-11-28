@@ -417,7 +417,7 @@ public class VentanaPersonal extends javax.swing.JFrame {
             vaciarCampos();
             return;
         }
-        int pos = tienda.getEmpleados().buscarPorDni(entradas.codigoDe(entradas.elegido(cboElegir)));
+        int pos = cboElegir.getSelectedIndex() - 1;
         if (pos == -1) {
             return;
         }

@@ -16,27 +16,39 @@ public class Reglas {
     }
 
     public boolean soloLetras(String texto) {
-        if (texto.trim().length() == 0) {
-            return false;
-        }
+        int letras = 0;
         for (int i = 0; i < texto.length(); i++) {
             char c = texto.charAt(i);
-            if (!Character.isLetter(c) && c != ' ' && c != '\'') {
+            boolean esLetra = (c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') || (c >= 192 && c <= 255);
+            if (esLetra) {
+                letras++;
+            } else if (c != ' ' && c != '\'') {
                 return false;
             }
         }
-        return true;
+        return letras > 0;
     }
 
     public boolean correoValido(String correo) {
-        int arroba = correo.indexOf("@");
-        int punto = correo.lastIndexOf(".");
-        if (arroba < 1 || correo.indexOf("@", arroba + 1) != -1) {
+        int arrobas = 0;
+        int posArroba = -1;
+        int posPunto = -1;
+        for (int i = 0; i < correo.length(); i++) {
+            char c = correo.charAt(i);
+            if (c == ' ') {
+                return false;
+            }
+            if (c == '@') {
+                arrobas++;
+                posArroba = i;
+            }
+            if (c == '.') {
+                posPunto = i;
+            }
+        }
+        if (arrobas != 1 || posArroba < 1) {
             return false;
         }
-        if (correo.indexOf(" ") != -1) {
-            return false;
-        }
-        return punto > arroba + 1 && punto < correo.length() - 1;
+        return posPunto > posArroba + 1 && posPunto < correo.length() - 1;
     }
 }

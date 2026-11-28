@@ -522,7 +522,7 @@ public class VentanaJuguetes extends javax.swing.JFrame {
             vaciarCampos();
             return;
         }
-        int pos = tienda.getJuguetes().buscarPorCodigo(entradas.codigoDe(entradas.elegido(cboElegir)));
+        int pos = cboElegir.getSelectedIndex() - 1;
         if (pos == -1) {
             return;
         }
@@ -530,9 +530,9 @@ public class VentanaJuguetes extends javax.swing.JFrame {
         entCodigo.setText(obj.getCodigo());
         entNombre.setText(obj.getNombre());
         entradas.seleccionar(cboCategoria, obj.getCategoria());
-        entAnio.setText(String.valueOf(obj.getAnio()));
-        entPrecio.setText(String.valueOf(obj.getPrecioBase()));
-        entStock.setText(String.valueOf(obj.getStock()));
+        entAnio.setText(String.format("%d", obj.getAnio()));
+        entPrecio.setText(String.format("%.2f", obj.getPrecioBase()));
+        entStock.setText(String.format("%d", obj.getStock()));
         entradas.seleccionar(cboEstado, obj.getEstado());
     }
 }

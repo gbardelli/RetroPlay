@@ -258,7 +258,7 @@ public class VentanaInventario extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Elija un juguete de la lista", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        int pos = tienda.getJuguetes().buscarPorCodigo(entradas.codigoDe(entradas.elegido(cboCodigo)));
+        int pos = cboCodigo.getSelectedIndex() - 1;
         if (pos == -1) {
             JOptionPane.showMessageDialog(this, "Juguete no encontrado", "Error", JOptionPane.ERROR_MESSAGE);
             return;

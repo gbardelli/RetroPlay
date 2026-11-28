@@ -382,7 +382,7 @@ public class VentanaClientes extends javax.swing.JFrame {
             vaciarCampos();
             return;
         }
-        int pos = tienda.getClientes().buscarPorDni(entradas.codigoDe(entradas.elegido(cboElegir)));
+        int pos = cboElegir.getSelectedIndex() - 1;
         if (pos == -1) {
             return;
         }

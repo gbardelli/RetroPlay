@@ -6,6 +6,9 @@ public class VentanaNuevaOrden extends javax.swing.JFrame {
 
     private Tienda tienda;
     private Entradas entradas = new Entradas();
+    private String[] tiposArticulo = new String[200];
+    private String[] codigosArticulo = new String[200];
+    private int contArticulos = 0;
     private Orden orden;
     private javax.swing.table.DefaultTableModel modelo;
 
@@ -34,14 +37,23 @@ public class VentanaNuevaOrden extends javax.swing.JFrame {
         for (int i = 0; i < tienda.getJuguetes().getCont(); i++) {
             Juguete obj = tienda.getJuguetes().getJuguetes()[i];
             cboArticulo.addItem(String.format("[Juguete] %s - %s", obj.getCodigo(), obj.getNombre()));
+            tiposArticulo[contArticulos] = "Juguete";
+            codigosArticulo[contArticulos] = obj.getCodigo();
+            contArticulos++;
         }
         for (int i = 0; i < tienda.getServicios().getCont(); i++) {
             Servicio obj = tienda.getServicios().getServicios()[i];
             cboArticulo.addItem(String.format("[Servicio] %s - %s", obj.getCodigo(), obj.getNombre()));
+            tiposArticulo[contArticulos] = "Servicio";
+            codigosArticulo[contArticulos] = obj.getCodigo();
+            contArticulos++;
         }
         for (int i = 0; i < tienda.getPaquetes().getCont(); i++) {
             Paquete obj = tienda.getPaquetes().getPaquetes()[i];
             cboArticulo.addItem(String.format("[Paquete] %s", obj.getNombre()));
+            tiposArticulo[contArticulos] = "Paquete";
+            codigosArticulo[contArticulos] = obj.getNombre();
+            contArticulos++;
         }
         mostrar();
         retroplaymanager.apariencia.Apariencia.vestir(this);
@@ -416,7 +428,7 @@ public class VentanaNuevaOrden extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     public boolean vacio() {
-        if (entradas.codigoDe(entradas.elegido(cboCliente)).equals("") || entradas.elegido(cboTipo).equals("") || entradas.elegido(cboEntrega).equals("")) {
+        if (entradas.elegido(cboCliente).equals("") || entradas.elegido(cboTipo).equals("") || entradas.elegido(cboEntrega).equals("")) {
             return true;
         }
         if (entradas.elegido(cboDiaR).equals("") || entradas.elegido(cboMesR).equals("") || entradas.elegido(cboAnioR).equals("")) {
@@ -433,9 +445,9 @@ public class VentanaNuevaOrden extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Complete los datos de la orden", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        int pos = tienda.getClientes().buscarPorDni(entradas.codigoDe(entradas.elegido(cboCliente)));
+        int pos = cboCliente.getSelectedIndex() - 1;
         if (pos == -1) {
-            JOptionPane.showMessageDialog(this, String.format("El cliente con DNI %s no esta registrado", entradas.codigoDe(entradas.elegido(cboCliente))), "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "El cliente elegido no esta registrado", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
         String entrega = entradas.elegido(cboEntrega);
@@ -479,7 +491,7 @@ public class VentanaNuevaOrden extends javax.swing.JFrame {
             return;
         }
         if (!tipoArticulo().equals(tipo)) {
-            JOptionPane.showMessageDialog(this, String.format("El articulo elegido es de tipo %s: use el boton Agregar %s", tipoArticulo(), tipoArticulo().toLowerCase()), "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, String.format("El articulo elegido es de tipo %s: use el boton Agregar %s", tipoArticulo(), tipoArticulo()), "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
         if (!entradas.esEntero(entCantidad.getText())) {
@@ -588,22 +600,16 @@ public class VentanaNuevaOrden extends javax.swing.JFrame {
     }
 
     public String tipoArticulo() {
-        String texto = entradas.elegido(cboArticulo);
-        if (texto.equals("")) {
+        if (cboArticulo.getSelectedIndex() <= 0) {
             return "";
         }
-        return texto.substring(1, texto.indexOf("]"));
+        return tiposArticulo[cboArticulo.getSelectedIndex() - 1];
     }
 
     public String codigoArticulo() {
-        String texto = entradas.elegido(cboArticulo);
-        if (texto.equals("")) {
+        if (cboArticulo.getSelectedIndex() <= 0) {
             return "";
         }
-        String resto = texto.substring(texto.indexOf("] ") + 2);
-        if (tipoArticulo().equals("Paquete")) {
-            return resto;
-        }
-        return entradas.codigoDe(resto);
+        return codigosArticulo[cboArticulo.getSelectedIndex() - 1];
     }
 }
